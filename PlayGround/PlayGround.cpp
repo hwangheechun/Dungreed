@@ -6,7 +6,13 @@ HRESULT PlayGround::Init()
 {
 	GameNode::Init(true);
 
+	Player* player = new Player();
+	OBJECTMANAGER->AddObject(ObjectType::Player, player);
+
 	
+
+	CAMERA->ChangeTarget(OBJECTMANAGER->FindObject(ObjectType::Player, L"Player"));
+	CAMERA->SetCameraMode(CameraState::TARGET);
 
 	return S_OK;
 }
@@ -22,7 +28,7 @@ void PlayGround::Update()
 
 	OBJECTMANAGER->Update();
 	SCENEMANAGER->Update();
-
+	CAMERA->Update();
 	EventManager::GetInstance()->Update();
 }
 
