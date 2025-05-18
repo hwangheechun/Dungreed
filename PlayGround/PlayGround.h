@@ -1,12 +1,13 @@
 ﻿#pragma once
 #include "../GameFramework/GameNode.h"
-#include "Shantae.h"
-#include "Ground.h"
 #include "UI.h"
 #include "Camera.h"
 #include "Obstacle.h"
 #include "Scene.h"
 #include "EventManager.h"
+
+#include "Player.h"
+#include "Weapon.h"
 
 class PlayGround : public GameNode
 {	

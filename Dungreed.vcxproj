@@ -22,7 +22,7 @@
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{9db61177-1e7b-46a0-b7bd-277eb0314f87}</ProjectGuid>
-    <RootNamespace>D2DFramework</RootNamespace>
+    <RootNamespace>Dungreed</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -154,9 +154,12 @@
     <ClInclude Include="GameFramework\Utils.h" />
     <ClInclude Include="GameFramework\Vector2.h" />
     <ClInclude Include="PlayGround\Camera.h" />
+    <ClInclude Include="PlayGround\Player.h" />
+    <ClInclude Include="PlayGround\PlayerStatus.h" />
     <ClInclude Include="PlayGround\PlayGround.h" />
     <ClInclude Include="PlayGround\Scene.h" />
     <ClInclude Include="PlayGround\UI.h" />
+    <ClInclude Include="PlayGround\Weapon.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -181,16 +184,16 @@
     <ClCompile Include="GameFramework\Utils.cpp" />
     <ClCompile Include="GameFramework\Vector2.cpp" />
     <ClCompile Include="PlayGround\Camera.cpp" />
+    <ClCompile Include="PlayGround\Player.cpp" />
+    <ClCompile Include="PlayGround\PlayerStatus.cpp" />
     <ClCompile Include="PlayGround\PlayGround.cpp" />
     <ClCompile Include="PlayGround\Scene.cpp" />
     <ClCompile Include="PlayGround\UI.cpp" />
+    <ClCompile Include="PlayGround\Weapon.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="WinMain.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Comment.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,7 +3,7 @@
 #include "GameObject.h"
 
 Camera::Camera()
-	: _position(0.f, 0.f), _mapSize(Vector2(WINSIZEX , WINSIZEY))
+	: _position(0.f, 0.f), _mapSize(Vector2(WINSIZEX , 100))
 {
 }
 
@@ -34,7 +34,7 @@ void Camera::MoveToTarget()
 	if (_target == nullptr)
 		return;
 
-	_position = _target->GetPosition() + Vector2(0,-250);
+	_position = _target->GetPosition() + Vector2(0,-300);
 
 	UpdateRect();
 	//CheckRect();
@@ -71,7 +71,7 @@ FloatRect Camera::GetRelativeRect(FloatRect _rect)
 
 void Camera::UpdateRect()
 {
-	_rc = RectMakePivot(_position, Vector2{ WINSIZEX, WINSIZEY }, Pivot::Center);
+	_rc = RectMakePivot(_position, Vector2{ WINSIZEX, 1000 }, Pivot::Center);
 }
 
 void Camera::CheckRect()

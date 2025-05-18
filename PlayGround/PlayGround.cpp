@@ -6,6 +6,8 @@ HRESULT PlayGround::Init()
 {
 	GameNode::Init(true);
 
+	
+
 	return S_OK;
 }
 
@@ -20,7 +22,6 @@ void PlayGround::Update()
 
 	OBJECTMANAGER->Update();
 	SCENEMANAGER->Update();
-	CAMERA->Update();
 
 	EventManager::GetInstance()->Update();
 }

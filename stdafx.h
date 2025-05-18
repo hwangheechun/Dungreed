@@ -38,13 +38,14 @@ enum class Pivot : int
 #include "PlayGround/Camera.h"
 
 using namespace UTIL;
+using namespace std;
 
 // 여기서 프로그램에 필요한 추가 헤더를 참조합니다.
 #define WINNAME (LPCTSTR)(TEXT("D2D-Framework"))
 #define WINSTARTX	200
 #define WINSTARTY	50
-#define WINSIZEX	1280	
-#define WINSIZEY	720
+#define WINSIZEX	1600	
+#define WINSIZEY	900
 #define WINSTYLE	WS_CAPTION | WS_SYSMENU
 
 #define RANDOM RandomFunction::GetInstance()

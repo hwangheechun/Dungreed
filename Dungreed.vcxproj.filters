@@ -138,6 +138,15 @@
     <ClInclude Include="PlayGround\UI.h">
       <Filter>PlayGround</Filter>
     </ClInclude>
+    <ClInclude Include="PlayGround\Player.h">
+      <Filter>PlayGround</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround\PlayerStatus.h">
+      <Filter>PlayGround</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround\Weapon.h">
+      <Filter>PlayGround</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameFramework\D2DRenderer+Draw.cpp">
@@ -218,10 +227,14 @@
     <ClCompile Include="PlayGround\UI.cpp">
       <Filter>PlayGround</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Comment.txt">
+    <ClCompile Include="PlayGround\Player.cpp">
       <Filter>PlayGround</Filter>
-    </Text>
+    </ClCompile>
+    <ClCompile Include="PlayGround\PlayerStatus.cpp">
+      <Filter>PlayGround</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\Weapon.cpp">
+      <Filter>PlayGround</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
