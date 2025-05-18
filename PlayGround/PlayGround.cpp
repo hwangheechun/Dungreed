@@ -12,6 +12,9 @@ HRESULT PlayGround::Init()
 	UI* _ui = new UI();
 	OBJECTMANAGER->AddObject(ObjectType::UI, _ui);
 
+	Weapon* _weapon = new Weapon();
+	OBJECTMANAGER->AddObject(ObjectType::Item, _weapon);
+
 	CAMERA->ChangeTarget(OBJECTMANAGER->FindObject(ObjectType::Player, L"Player"));
 	CAMERA->SetCameraMode(CameraState::TARGET);
 
