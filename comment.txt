@@ -1,0 +1,13 @@
+//스켈레톤
+_D2DRenderer->RenderText(50, 520, L"해골:" + to_wstring((int)_skeletonImage->GetSize().x), 15);
+	_D2DRenderer->RenderText(50, 530, L"해골:" + to_wstring((int)_skeletonImage->GetSize().y), 15);
+
+	_D2DRenderer->RenderText(300, 200, L"너비 : " + to_wstring((int)_skeletonImage->GetWidth()), 15);
+	_D2DRenderer->RenderText(300, 225, L"높이 : " + to_wstring((int)_skeletonImage->GetHeight()), 15);
+	_D2DRenderer->RenderText(300, 250, L"가로 프레임 : " + to_wstring((int)_skeletonImage->GetMaxFrameX()), 15);
+	_D2DRenderer->RenderText(300, 275, L"세로 프레임 : " + to_wstring((int)_skeletonImage->GetMaxFrameY()), 15);
+	_D2DRenderer->RenderText(300, 300, L"한 프레임 너비 : " + to_wstring((int)_skeletonImage->GetFrameSize().x), 15);
+	_D2DRenderer->RenderText(300, 325, L"한 프레임 높이 : " + to_wstring((int)_skeletonImage->GetFrameSize().y), 15);
+	//_D2DRenderer->RenderText(300, 325, L"image wichi : " + to_wstring((int)), 15);
+	//_D2DRenderer->RenderText(300, 350, L"재생 : " + to_wstring((int)_skeletonAnimation->IsPlaying()), 15);
+	//_D2DRenderer->RenderText(300, 375, L"인덱스 : " + to_wstring((int)_skeletonAnimation->), 15);
