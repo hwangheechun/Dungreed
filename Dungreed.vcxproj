@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)GameFramework</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)GameFramework;$(SolutionDir)include\rapidjson;$(SolutionDir)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -154,10 +154,14 @@
     <ClInclude Include="GameFramework\Utils.h" />
     <ClInclude Include="GameFramework\Vector2.h" />
     <ClInclude Include="PlayGround\Camera.h" />
+    <ClInclude Include="PlayGround\MainScene.h" />
+    <ClInclude Include="PlayGround\Monster.h" />
     <ClInclude Include="PlayGround\Player.h" />
     <ClInclude Include="PlayGround\PlayerStatus.h" />
     <ClInclude Include="PlayGround\PlayGround.h" />
     <ClInclude Include="PlayGround\Scene.h" />
+    <ClInclude Include="PlayGround\Skeleton.h" />
+    <ClInclude Include="PlayGround\TownScene.h" />
     <ClInclude Include="PlayGround\UI.h" />
     <ClInclude Include="PlayGround\Weapon.h" />
     <ClInclude Include="stdafx.h" />
@@ -184,16 +188,23 @@
     <ClCompile Include="GameFramework\Utils.cpp" />
     <ClCompile Include="GameFramework\Vector2.cpp" />
     <ClCompile Include="PlayGround\Camera.cpp" />
+    <ClCompile Include="PlayGround\MainScene.cpp" />
+    <ClCompile Include="PlayGround\Monster.cpp" />
     <ClCompile Include="PlayGround\Player.cpp" />
     <ClCompile Include="PlayGround\PlayerStatus.cpp" />
     <ClCompile Include="PlayGround\PlayGround.cpp" />
     <ClCompile Include="PlayGround\Scene.cpp" />
+    <ClCompile Include="PlayGround\Skeleton.cpp" />
+    <ClCompile Include="PlayGround\TownScene.cpp" />
     <ClCompile Include="PlayGround\UI.cpp" />
     <ClCompile Include="PlayGround\Weapon.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="WinMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="comment.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

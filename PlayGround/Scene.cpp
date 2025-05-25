@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Scene.h"
+#include <string>
 
 Scene::Scene()
 {
@@ -64,3 +65,4 @@ void IntroScene::Render()
 		_introImage->Render(vImage);
 	}
 }
+

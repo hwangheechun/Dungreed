@@ -52,6 +52,12 @@
     <Filter Include="GameFramework\GameObject">
       <UniqueIdentifier>{3cc2bbe7-4155-4d20-92bf-c928616e8830}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PlayGround\Monster">
+      <UniqueIdentifier>{bf3f2c17-af03-42d2-bec8-0abd164f688a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\Scene">
+      <UniqueIdentifier>{d024aeea-6be4-4821-a1ee-9d43e39e990c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameFramework\D2DRenderer.h">
@@ -147,6 +153,18 @@
     <ClInclude Include="PlayGround\Weapon.h">
       <Filter>PlayGround</Filter>
     </ClInclude>
+    <ClInclude Include="PlayGround\Monster.h">
+      <Filter>PlayGround</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround\Skeleton.h">
+      <Filter>PlayGround\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround\TownScene.h">
+      <Filter>PlayGround\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround\MainScene.h">
+      <Filter>PlayGround\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameFramework\D2DRenderer+Draw.cpp">
@@ -236,5 +254,22 @@
     <ClCompile Include="PlayGround\Weapon.cpp">
       <Filter>PlayGround</Filter>
     </ClCompile>
+    <ClCompile Include="PlayGround\Monster.cpp">
+      <Filter>PlayGround</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\Skeleton.cpp">
+      <Filter>PlayGround\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\TownScene.cpp">
+      <Filter>PlayGround\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\MainScene.cpp">
+      <Filter>PlayGround\Scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="comment.txt">
+      <Filter>PlayGround</Filter>
+    </Text>
   </ItemGroup>
 </Project>

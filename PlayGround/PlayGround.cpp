@@ -6,15 +6,9 @@ HRESULT PlayGround::Init()
 {
 	GameNode::Init(true);
 
-	Player* player = new Player();
-	OBJECTMANAGER->AddObject(ObjectType::Player, player);
-
-	UI* _ui = new UI();
-	OBJECTMANAGER->AddObject(ObjectType::UI, _ui);
-
-	Weapon* _weapon = new Weapon();
-	OBJECTMANAGER->AddObject(ObjectType::Item, _weapon);
-
+	SCENEMANAGER->AddScene(L"MainScene", new MainScene());
+	SCENEMANAGER->ChangeScene(L"MainScene");
+	
 	CAMERA->ChangeTarget(OBJECTMANAGER->FindObject(ObjectType::Player, L"Player"));
 	CAMERA->SetCameraMode(CameraState::TARGET);
 

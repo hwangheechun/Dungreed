@@ -6,8 +6,9 @@
 #include "Scene.h"
 #include "EventManager.h"
 
-#include "Player.h"
 #include "Weapon.h"
+#include "Skeleton.h"
+#include "MainScene.h"
 
 class PlayGround : public GameNode
 {	
