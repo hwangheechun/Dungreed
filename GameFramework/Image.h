@@ -50,6 +50,9 @@ public:
 	void FrameRender(const Vector2& position, const int frameX, const int frameY);
 	void AniRender(const Vector2& position, Animation* ani, float scale);
 
+	//추가
+	void AniRender(const Vector2& position, Animation* ani, float scale, bool _isLeft);
+
 	// 이미지 클래스 렌더 관련 옵션들 전부 초기화
 	void ResetRenderOption();
 

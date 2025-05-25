@@ -24,7 +24,7 @@ private:
 	float _frameUpdateSec;	// 프레임 경과 시간
 	float _elapsedSec;		// delta time
 
-	DWORD _nowPlayIndex;	// 현재 인덱스
+	
 	bool _isPlaying;		// 재생 중인지에 대한 여부
 
 	void*						_obj;
@@ -62,6 +62,7 @@ public:
 	void Pause();
 	void Resume();
 
+	DWORD _nowPlayIndex;	// 현재 인덱스
 	inline bool IsPlaying() { return _isPlaying; }
 
 	inline POINT GetFramePos() { return _frameList[_playList[_nowPlayIndex]]; }

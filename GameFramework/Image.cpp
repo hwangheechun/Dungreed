@@ -52,7 +52,8 @@ void Image::Render(const Vector2& position)
 
 	// SRT
 	// 스케일 행렬
-	D2D1::Matrix3x2F scaleMatrix = D2D1::Matrix3x2F::Scale(_scale, _scale, D2D1::Point2F(size.x / 2.f, size.y / 2.f));
+	//D2DRenderer::GetInstance()->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Scale(-1.f, 1.f));
+	D2D1::Matrix3x2F scaleMatrix = D2D1::Matrix3x2F::Scale(_scale, _scale, D2D1::Point2F(size.x / 2.f, size.y / 3.f));
 	// 회전 행렬
 	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(_angle, D2D1::Point2F(size.x / 2.f, size.y / 2.f));
 	// 이동 행렬
@@ -61,6 +62,7 @@ void Image::Render(const Vector2& position)
 	D2D1_RECT_F dxArea = D2D1::RectF(0.f, 0.f, size.x, size.y);
 
 	D2DRenderer::GetInstance()->GetRenderTarget()->SetTransform(scaleMatrix * rotateMatrix * translateMatrix);
+	
 	D2DRenderer::GetInstance()->GetRenderTarget()->DrawBitmap(_bitmap, dxArea, _alpha);
 	ResetRenderOption();
 }
@@ -98,6 +100,29 @@ void Image::AniRender(const Vector2& position, Animation* ani, float scale)
 	Vector2 size = tempFrameSize * scale;
 
 	D2D1::Matrix3x2F scaleMatrix = D2D1::Matrix3x2F::Scale(scale, scale, D2D1::Point2F(0, 0));
+	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(_angle, D2D1::Point2F(size.x / 2.f, size.y / 2.f));
+	D2D1::Matrix3x2F translateMatrix = D2D1::Matrix3x2F::Translation((position.x - size.x / 2.f), (position.y - size.y / 2.f));//(position.x - size.x / 2.f, position.y - size.y / 2.f ); // 중점 ??
+
+	D2D1_RECT_F dxArea = D2D1::RectF(0.0f, 0.0f, _size.x, _size.y);
+	D2D1_RECT_F dxSrc = D2D1::RectF((float)ani->GetFramePos().x, (float)ani->GetFramePos().y,
+		(float)(ani->GetFramePos().x + tempFrameSize.x),
+		(float)(ani->GetFramePos().y + tempFrameSize.y));
+
+	D2DRenderer::GetInstance()->GetRenderTarget()->SetTransform(scaleMatrix * rotateMatrix * translateMatrix);
+	D2DRenderer::GetInstance()->GetRenderTarget()->DrawBitmap(_bitmap, dxArea, _alpha, D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR, &dxSrc);
+	ResetRenderOption();
+}
+
+//좌우 반전 이미지 변환(2025/05/22)
+void Image::AniRender(const Vector2& position, Animation* ani, float scale, bool isLeft)
+{
+	Vector2 tempFrameSize;
+	tempFrameSize.x = ani->GetFrameWidth();
+	tempFrameSize.y = ani->GetFrameHeight();
+
+	Vector2 size = tempFrameSize * scale;
+
+	D2D1::Matrix3x2F scaleMatrix = D2D1::Matrix3x2F::Scale((isLeft ? scale * -1.f : scale * 1.f), scale, D2D1::Point2F(0, 0));
 	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(_angle, D2D1::Point2F(size.x / 2.f, size.y / 2.f));
 	D2D1::Matrix3x2F translateMatrix = D2D1::Matrix3x2F::Translation((position.x - size.x / 2.f), (position.y - size.y / 2.f));//(position.x - size.x / 2.f, position.y - size.y / 2.f ); // 중점 ??
 

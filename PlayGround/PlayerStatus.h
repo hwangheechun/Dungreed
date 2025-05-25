@@ -1,6 +1,7 @@
 #pragma once
 #include "UI.h"
 
+
 class PlayerStatus : public UI
 {
 	PlayerStatus();
@@ -10,7 +11,5 @@ class PlayerStatus : public UI
 	void Release() override;
 	void Update() override;
 	void Render() override;
-
-	Image* _playerHP = nullptr;
 };
 

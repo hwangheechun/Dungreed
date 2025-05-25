@@ -39,6 +39,18 @@ inline FloatRect RectMakePivot(const Vector2& pos, const Vector2& size, const Pi
 		result.right = pos.x + size.x;
 		result.bottom = pos.y + size.y;
 		return result;
+	case Pivot::Left:
+		result.left = pos.x;
+		result.top = pos.y;
+		result.right = pos.x + size.x;
+		result.bottom = pos.y + size.y;
+		return result;
+	case Pivot::Right:
+		result.left = pos.x;
+		result.top = pos.y;
+		result.right = pos.x + size.x;
+		result.bottom = pos.y + size.y;
+		return result;
 	case Pivot::Center:
 		result.left = pos.x - size.x / 2.f;
 		result.top = pos.y - size.y / 2.f;
