@@ -20,5 +20,7 @@ public:
 	void MoveAngle(float angle);
 	float _angle;
 	Vector2 _direction;
+
+	Image* _weaponImage = nullptr;
 };
 

@@ -17,7 +17,7 @@
 
 enum class Pivot : int
 {
-	LeftTop, Center, Bottom, Top
+	LeftTop, Left, Right, Center, Bottom, Top
 };
 
 #include "LibraryHeader.h"

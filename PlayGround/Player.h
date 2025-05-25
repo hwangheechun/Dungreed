@@ -41,8 +41,15 @@ public:
 	bool _isJumping = false;
 
 	bool _isDash = false;
-	int attackCount = 10;
+	bool _isSlashDown = false;
 
 	Weapon* _weapon = nullptr;
+
+	//충돌 관련
+	bool IsCollide(FloatRect _rect, FloatRect _rect2);
+
+	//체력 관련a
+	float _maxHP = 80.f;
+	float _hp = 80.f;
 };
 

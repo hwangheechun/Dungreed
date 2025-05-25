@@ -44,6 +44,15 @@ void Player::Update()
 	_cursor.y = _ptMouse.y;
 
 	_weapon = dynamic_cast<Weapon*>(OBJECTMANAGER->FindObject(ObjectType::Item, L"Weapon"));
+	//_skel = dynamic_cast<Skeleton*>(OBJECTMANAGER->FindObject(ObjectType::Enemy, L"Skeleton"));
+
+	if (_weapon)
+	{
+		if (_weapon->_angle * 180 / 3.141592 < 0 && _isLeft == false)
+			_weapon->_weaponImage->SetAngle(_weapon->_angle * 180 / 3.141592);
+		else if (_weapon->_angle * 180 / 3.141592 < 0 && _isLeft == true)
+			_weapon->_weaponImage->SetAngle(-180 + _weapon->_angle * 180 / 3.141592);
+	}
 
 	_playerAnimation->FrameUpdate(TIMEMANAGER->GetElapsedTime());
 
@@ -66,6 +75,32 @@ void Player::Update()
 	}
 
 	Operate();
+
+	if (_weapon)
+	{
+		if (!_isSlashDown)
+		{
+			if (_weapon->_angle * 180 / 3.141592 < 0 && _isLeft == false)	//1사분면
+				_weapon->_weaponImage->SetAngle(_weapon->_angle * 180 / 3.141592);
+			else if (_weapon->_angle * 180 / 3.141592 < 0 && _isLeft == true)	//2사분면
+				_weapon->_weaponImage->SetAngle(-180 + _weapon->_angle * 180 / 3.141592);
+			else if (_weapon->_angle * 180 / 3.141592 >= 0 && _isLeft == false)	//3사분면
+				_weapon->_weaponImage->SetAngle(_weapon->_angle * 180 / 3.141592 + 200);
+			else //4사분면
+				_weapon->_weaponImage->SetAngle(_weapon->_angle * 180 / 3.141592 - 20);
+		}
+		else
+		{
+			if (_weapon->_angle * 180 / 3.141592 < 0 && _isLeft == false)
+				_weapon->_weaponImage->SetAngle(_weapon->_angle * 180 / 3.141592 + 155);
+			else if (_weapon->_angle * 180 / 3.141592 < 0 && _isLeft == true)
+				_weapon->_weaponImage->SetAngle(-180 + _weapon->_angle * 180 / 3.141592 -155);
+			else if (_weapon->_angle * 180 / 3.141592 >= 0 && _isLeft == false)
+				_weapon->_weaponImage->SetAngle(_weapon->_angle * 180 / 3.141592 + 20);
+			else
+				_weapon->_weaponImage->SetAngle(_weapon->_angle * 180 / 3.141592 + 165);
+		}
+	}
 }
 
 void Player::Render()
@@ -73,8 +108,8 @@ void Player::Render()
 	_D2DRenderer->FillRectangle(CAMERA->GetRelativeRect(_rect), D2DRenderer::DefaultBrush::White);
 	_D2DRenderer->DrawRectangle(CAMERA->GetRelativeRect(_rect), D2DRenderer::DefaultBrush::Black, 2.0f);
 	_playerImage->AniRender(CAMERA->GetRelativeVector2(_position), _playerAnimation, 6.5f);
-	
-	
+
+
 	_D2DRenderer->RenderText(550, 10, L"캐릭터 위치:" + to_wstring((int)CAMERA->GetRelativeVector2(_position).x), 15);
 	_D2DRenderer->RenderText(700, 10, to_wstring((int)CAMERA->GetRelativeVector2(_position).y), 15);
 	_D2DRenderer->RenderText(950, 10, L"실제 위치:" + to_wstring((int)_position.x), 15);
@@ -90,7 +125,7 @@ void Player::Render()
 
 	switch (_playerState)
 	{
-	case PlayerState::IDLE :
+	case PlayerState::IDLE:
 		_D2DRenderer->RenderText(800, 10, L"서있는 상태" + to_wstring((int)_playerState), 15);
 		break;
 	case PlayerState::RUN:
@@ -103,9 +138,9 @@ void Player::Render()
 	_D2DRenderer->RenderText(100, 250, L"가로 프레임 : " + to_wstring((int)_playerImage->GetMaxFrameX()), 15);
 	_D2DRenderer->RenderText(100, 275, L"세로 프레임 : " + to_wstring((int)_playerImage->GetMaxFrameY()), 15);
 	_D2DRenderer->RenderText(100, 300, L"한 프레임 너비 : " + to_wstring((int)_playerImage->GetFrameSize().x), 15);
-	_D2DRenderer->RenderText(100, 325, L"한 프레임 높이 : " + to_wstring((int)_playerImage->GetFrameSize().y), 15);
+	_D2DRenderer->RenderText(100, 325, L"한 프레임 높높이 : " + to_wstring((int)_playerImage->GetFrameSize().y), 15);
 
-	if(_isOnGround)
+	if (_isOnGround)
 		_D2DRenderer->RenderText(550, 30, L"착지" + to_wstring(_isOnGround), 15);
 	else
 		_D2DRenderer->RenderText(550, 30, L"점프" + to_wstring(_isOnGround), 15);
@@ -114,18 +149,25 @@ void Player::Render()
 	_D2DRenderer->RenderText(600, 30, L"마우스 : " + to_wstring((int)_cursor.x), 15);
 	_D2DRenderer->RenderText(700, 30, to_wstring((int)_cursor.y), 15);
 
-	if(_isLeft)
+	if (_isLeft)
 		_D2DRenderer->RenderText(550, 45, L"좌 : " + to_wstring(_isLeft), 15);
-	else 
+	else
 		_D2DRenderer->RenderText(550, 45, L"우 : " + to_wstring(_isLeft), 15);
 
 	//_D2DRenderer->RenderText(210, 800, to_wstring(_isDash + 125), 15);
-	_D2DRenderer->RenderText(410, 800, to_wstring(attackCount), 15);
+	_D2DRenderer->RenderText(410, 800, to_wstring(_isSlashDown), 15);
 
 	if (!_weapon)
 		_D2DRenderer->RenderText(910, 800, L"무기 없음", 15);
 	else
-		_D2DRenderer->RenderText(910, 800, to_wstring(_weapon->_angle), 15);
+		_D2DRenderer->RenderText(910, 800, to_wstring(_weapon->_angle * 180 / 3.141592), 15);
+
+	//if (!_skel)
+	//{
+	//	//_D2DRenderer->RenderText(1010, 850, L"충돌 여부" + to_wstring(IsCollide(_rect, _monster->_attackRange)), 15);
+	//	_D2DRenderer->RenderText(50, 700, L"몬스터잇다다다다다닫", 15);
+	//}
+		
 }
 
 void Player::Move(Vector2 moveDirection)
@@ -143,18 +185,20 @@ void Player::Dash()
 {
 	_isDash = true;
 	_isOnGround = false;
+	_isSlashDown = false;
 	_gravity = -200.0f;
 
-	if(_position != Vector2((float)_ptMouse.x, (float)_ptMouse.y))
+	if (_position != Vector2((float)_ptMouse.x, (float)_ptMouse.y))
 		_position += (Vector2((float)_ptMouse.x, (float)_ptMouse.y) - _position);
 	_rect = RectMakePivot(_position, _size, Pivot::Center);
 }
 
 void Player::Attack(Weapon* weapon)
 {
-	attackCount++;
-	weapon->MoveAngle(4);
-
+	if (_isSlashDown)
+		_isSlashDown = false;
+	else
+		_isSlashDown = true;
 }
 
 void Player::Operate()
@@ -179,11 +223,12 @@ void Player::Operate()
 		Jump();
 	}
 
-	if (KEYMANAGER->IsStayKeyDown(VK_LBUTTON))	//Mouse_R
+	if (KEYMANAGER->IsOnceKeyDown(VK_LBUTTON))	//Mouse_R
 	{
-		if(_weapon)
+		if (_weapon)
 			Attack(_weapon);
 	}
+
 	if (KEYMANAGER->IsOnceKeyDown(VK_RBUTTON))	//Mouse_R
 	{
 		Dash();
@@ -191,33 +236,40 @@ void Player::Operate()
 
 	switch (_playerState)
 	{
-		case PlayerState::IDLE :
-			_playerAnimation->SetPlayFrame(0, 4, false, true);
+	case PlayerState::IDLE:
+		_playerAnimation->SetPlayFrame(0, 4, false, true);
 
-			if (_cursor.x < _position.x)
-			{
-				_isLeft = true;
-				_playerImage = IMAGEMANAGER->FindImage(L"idle_left");
-			}
-			else
-			{
-				_isLeft = false;
-				_playerImage = IMAGEMANAGER->FindImage(L"idle");
-			}
-			break;
-		case PlayerState::RUN :
-			_playerAnimation->SetPlayFrame(0, 4, false, true);
+		if (_cursor.x < _position.x)
+		{
+			_isLeft = true;
+			_playerImage = IMAGEMANAGER->FindImage(L"idle_left");
+		}
+		else
+		{
+			_isLeft = false;
+			_playerImage = IMAGEMANAGER->FindImage(L"idle");
+		}
+		break;
+	case PlayerState::RUN:
+		_playerAnimation->SetPlayFrame(0, 4, false, true);
 
-			if (_cursor.x < _position.x)
-			{
-				_isLeft = true;
-				_playerImage = IMAGEMANAGER->FindImage(L"idle_left");
-			}
-			else
-			{
-				_isLeft = false;
-				_playerImage = IMAGEMANAGER->FindImage(L"idle");
-			}
-			break;
+		if (_cursor.x < _position.x)
+		{
+			_isLeft = true;
+			_playerImage = IMAGEMANAGER->FindImage(L"idle_left");
+		}
+		else
+		{
+			_isLeft = false;
+			_playerImage = IMAGEMANAGER->FindImage(L"idle");
+		}
+		break;
 	}
+}
+
+bool Player::IsCollide(FloatRect _rect, FloatRect _rect2)
+{
+	if (_rect.right > _rect2.left && _rect.left < _rect2.right && _rect.top < _rect2.bottom && _rect.bottom > _rect2.top)
+		return true;
+	else return false;
 }
