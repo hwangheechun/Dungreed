@@ -8,6 +8,8 @@ HRESULT SceneManager::Init()
 {
 	_currentScene = nullptr;
 
+	//_tileImages.emplace_back(IMAGEMANAGER->AddFrameImage(L"terrain", L"Resources/terrain1.png", 16, 18));	// 1번
+
 	return S_OK;
 }
 
@@ -74,4 +76,12 @@ HRESULT SceneManager::ChangeScene(const wstring& sceneName)
 	}
 
 	return E_FAIL;
+}
+
+Image* SceneManager::GetTileImage(int tileNum)
+{
+	if (_tileImages.size() <= tileNum || tileNum < 0)
+		return nullptr;
+
+	return _tileImages[tileNum];
 }

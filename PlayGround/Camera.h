@@ -47,6 +47,8 @@ public:
 
 	Vector2 GetPosition() { return _position; }
 
+	FloatRect GetRect() { return _rc; }
+
 private:
 	void UpdateRect();
 	void CheckRect();

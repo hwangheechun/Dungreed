@@ -14,6 +14,8 @@ private:
 	static GameNode* _currentScene;
 	mapSceneList _sceneList;
 
+	vector<Image*> _tileImages;		// 필요에 따라서 확장
+
 protected:
 	SceneManager() = default;
 	virtual ~SceneManager() = default;
@@ -29,5 +31,7 @@ public:
 	GameNode* AddScene(const wstring& sceneName, GameNode* scene);
 
 	HRESULT ChangeScene(const wstring& sceneName);
+
+	Image* GetTileImage(int tileNum);
 };
 
