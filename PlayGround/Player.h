@@ -1,8 +1,10 @@
 #pragma once
 #include "GameObject.h"
-#include "Weapon.h"
+//#include "Weapon.h"
+#include "Inventory.h"
 
 class Weapon;
+class Inventory;
 
 enum class PlayerState : int
 {
@@ -44,9 +46,11 @@ public:
 	bool _isSlashDown = false;
 
 	Weapon* _weapon = nullptr;
+	Inventory* _inventory = nullptr;
 
 	//충돌 관련
 	bool IsCollide(FloatRect _rect, FloatRect _rect2);
+	bool IsCollide(Vector2 _point, FloatRect _rect);
 
 	//체력 관련a
 	float _maxHP = 80.f;

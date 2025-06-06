@@ -69,42 +69,41 @@ void Weapon::Render()
 	_D2DRenderer->RenderText(1400, 415, L"»çÀÎ : " + to_wstring((float)sin(_angle) * 70), 15);
 
 
-	//_weaponImage->Render(CAMERA->GetRelativeVector2(_position));
-
-	if (_angle * 180 / 3.141592 <= 0)
-	{
-		if (_player->_isLeft)
+		if (_angle * 180 / 3.141592 <= 0)
 		{
-			if (_player->_isSlashDown)
-				_weaponImage->Render(CAMERA->GetRelativeVector2(_position + Vector2((float)sin(_angle) * 70, -(float)cos(_angle) * 70)));
+			if (_player->_isLeft)
+			{
+				if (_player->_isSlashDown)
+					_weaponImage->Render(CAMERA->GetRelativeVector2(_position + Vector2((float)sin(_angle) * 70, -(float)cos(_angle) * 70)));
+				else
+					_weaponImage->Render(CAMERA->GetRelativeVector2(_position + Vector2(-(float)sin(_angle) * 70, (float)cos(_angle) * 70)));
+			}
 			else
-				_weaponImage->Render(CAMERA->GetRelativeVector2(_position + Vector2(-(float)sin(_angle) * 70, (float)cos(_angle) * 70)));
+			{
+				if (_player->_isSlashDown)
+					_weaponImage->Render(CAMERA->GetRelativeVector2(_position + Vector2(-(float)sin(_angle) * 70, (float)cos(_angle) * 70)));
+				else
+					_weaponImage->Render(CAMERA->GetRelativeVector2(_position + Vector2((float)sin(_angle) * 70, -(float)cos(_angle) * 70)));
+			}
 		}
 		else
 		{
-			if (_player->_isSlashDown)
-				_weaponImage->Render(CAMERA->GetRelativeVector2(_position + Vector2(-(float)sin(_angle) * 70, (float)cos(_angle) * 70)));
+			if (_player->_isLeft)
+			{
+				if (_player->_isSlashDown)
+					_weaponImage->Render(CAMERA->GetRelativeVector2(_position + Vector2(-(float)sin(_angle) * 70, (float)cos(_angle) * 70)));
+				else
+					_weaponImage->Render(CAMERA->GetRelativeVector2(_position + Vector2((float)sin(_angle) * 70, -(float)cos(_angle) * 70)));
+			}
 			else
-				_weaponImage->Render(CAMERA->GetRelativeVector2(_position + Vector2((float)sin(_angle) * 70, -(float)cos(_angle) * 70)));
+			{
+				if (_player->_isSlashDown)
+					_weaponImage->Render(CAMERA->GetRelativeVector2(_position + Vector2(-(float)sin(_angle) * 70, (float)cos(_angle) * 70)));
+				else
+					_weaponImage->Render(CAMERA->GetRelativeVector2(_position + Vector2(-(float)cos(_angle) * 70, (float)sin(_angle) * 70)));
+			}
 		}
-	}
-	else
-	{
-		if (_player->_isLeft)
-		{
-			if (_player->_isSlashDown)
-				_weaponImage->Render(CAMERA->GetRelativeVector2(_position + Vector2(-(float)sin(_angle) * 70, (float)cos(_angle) * 70)));
-			else
-				_weaponImage->Render(CAMERA->GetRelativeVector2(_position + Vector2((float)sin(_angle) * 70, -(float)cos(_angle) * 70)));
-		}
-		else
-		{
-			if (_player->_isSlashDown)
-				_weaponImage->Render(CAMERA->GetRelativeVector2(_position + Vector2(-(float)sin(_angle) * 70, (float)cos(_angle) * 70)));
-			else
-				_weaponImage->Render(CAMERA->GetRelativeVector2(_position + Vector2(-(float)cos(_angle) * 70, (float)sin(_angle) * 70)));
-		}
-	}
+	
 		//_weaponImage->Render(CAMERA->GetRelativeVector2(_position + Vector2(cos(_angle), sin(_angle))));
 
 	if (_angle * 180 / 3.141592 < 0)

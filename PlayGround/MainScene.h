@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "player.h"
 #include "UI.h"
+#include "Inventory.h"
 
 #include "TownScene.h"
 

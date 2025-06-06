@@ -10,11 +10,14 @@ HRESULT MainScene::Init()
 	Player* player = new Player();
 	OBJECTMANAGER->AddObject(ObjectType::Player, player);
 
-	UI* _ui = new UI();
-	OBJECTMANAGER->AddObject(ObjectType::UI, _ui);
-
 	Weapon* _weapon = new Weapon();
 	OBJECTMANAGER->AddObject(ObjectType::Item, _weapon);
+
+	Inventory* _inventory = new Inventory();
+	OBJECTMANAGER->AddObject(ObjectType::UI, _inventory);
+
+	UI* _ui = new UI();
+	OBJECTMANAGER->AddObject(ObjectType::UI, _ui);
 
 	SCENEMANAGER->AddScene(L"TownScene", new TownScene());
 	SCENEMANAGER->ChangeScene(L"TownScene");

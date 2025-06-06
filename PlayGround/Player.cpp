@@ -40,10 +40,11 @@ void Player::Release()
 
 void Player::Update()
 {
-	_cursor.x = CAMERA->GetPosition().x - WINSIZEX / 2 + _ptMouse.x;
+	_cursor.x = _ptMouse.x;//CAMERA->GetPosition().x - WINSIZEX / 2 
 	_cursor.y = _ptMouse.y;
 
 	_weapon = dynamic_cast<Weapon*>(OBJECTMANAGER->FindObject(ObjectType::Item, L"Weapon"));
+	_inventory = dynamic_cast<Inventory*>(OBJECTMANAGER->FindObject(ObjectType::UI, L"Inventory"));
 	//_skel = dynamic_cast<Skeleton*>(OBJECTMANAGER->FindObject(ObjectType::Enemy, L"Skeleton"));
 
 	if (_weapon)
@@ -100,11 +101,193 @@ void Player::Update()
 			else
 				_weapon->_weaponImage->SetAngle(_weapon->_angle * 180 / 3.141592 + 165);
 		}
+
+		if (_weapon->GetActive())
+		{
+			_inventory->_equipSlot1 = IMAGEMANAGER->FindImage(L"sword");
+		}
 	}
+
+	//if (IsCollide(_cursor, _inventory->_equipSlot[0]))
+	//{
+	//	if (KEYMANAGER->IsOnceKeyDown(0x47))	//Mouse_L	//G
+	//	{
+	//		if(_inventory->_isSlotCliked == true)
+	//			_inventory->_isSlotCliked = false;
+	//		else
+	//		{
+	//			_inventory->_isSlotCliked = true;
+	//			_inventory->_isListCliked = false;
+	//		}
+	//			
+	//	}
+	//}
+
+	for (int i = 0; i < 2; i++)
+	{
+		if (IsCollide(_cursor, _inventory->_equipSlot[i]))
+		{
+			if (KEYMANAGER->IsOnceKeyDown(0x47))	//Mouse_L	//G
+			{
+				if(_inventory->_isSlotCliked[i] == true)
+					_inventory->_isSlotCliked[i] = false;
+				else
+				{
+					_inventory->_isSlotCliked[i] = true;
+				}
+							
+			}
+		}
+	}
+
+	for (int i = 0; i < 15; i++)
+	{
+		if (IsCollide(_cursor, _inventory->_equipList[i]))
+		{
+			if (KEYMANAGER->IsOnceKeyDown(0x47))	//Mouse_L	//G
+			{
+				if (_inventory->_isListCliked[i] == true)
+					_inventory->_isListCliked[i] = false;
+				else
+				{
+					_inventory->_isListCliked[i] = true;
+					_inventory->_isSlotCliked[0] = false;
+					_inventory->_isSlotCliked[1] = false;
+				}
+			}
+		}
+	}
+	
+
+	//if (_inventory->_isSlotCliked)	//장비 슬롯 클릭
+	//{
+	//	for (int i = 0; i < 15; i++)
+	//	{
+	//		if (IsCollide(_cursor, _inventory->_equipList[i]))	
+	//		{
+	//			if (KEYMANAGER->IsOnceKeyDown(0x47))	//목록 클릭 시
+	//			{
+	//				
+	//				_inventory->_isListCliked = false;
+	//				_inventory->_isSlotCliked = false;
+	//			}
+	//		}
+	//	}
+	//}
+	//else
+	//{
+	//	for (int i = 0; i < 15; i++)
+	//	{
+	//		if (IsCollide(_cursor, _inventory->_equipList[i]))
+	//		{
+	//			if (KEYMANAGER->IsOnceKeyDown(0x47))
+	//			{
+	//				_inventory->_isListCliked = false;
+	//				_inventory->_isSlotCliked = false;
+	//			}
+	//		}
+	//	}
+	//}
+
+	//if (_weapon)
+	//{
+	//	/*if (_inventory->_isSlotCliked[0] == false)
+	//		_weapon->SetActive(false);*/
+	//}
+
+	//if (_inventory->GetActive())
+	//{
+	//	if (!_inventory->_isSlotCliked && !_inventory->_isListCliked)	//아무 것도 안 클릭 시
+	//		_inventory->_equipSlot1->Render(_inventory->_equipSlot[0].GetCenter());
+	//	else if (_inventory->_isSlotCliked && !_inventory->_isListCliked)	//무기 슬롯 클릭 시 
+	//		_inventory->_equipSlot1->Render(_cursor);
+	//	else if (_inventory->_isSlotCliked && _inventory->_isListCliked)	//
+	//	{
+	//		_inventory->_equipSlot1->Render(_inventory->_equipList[0].GetCenter());
+	//	}
+	//}
 }
 
 void Player::Render()
 {
+	for (int i = 0; i < 2; i++)
+		_D2DRenderer->RenderText(1350 + i * 100, 200, to_wstring((int)_inventory->_isSlotCliked[i]), 15);
+	for (int i = 0; i < 15; i++)
+		_D2DRenderer->RenderText(1350 + i * 20, 250, to_wstring((int)_inventory->_isListCliked[i]), 15);
+
+	if (_inventory->GetActive())
+	{
+		if (_weapon->GetActive())
+		{
+			if (!_inventory->_isSlotCliked[0] && !_inventory->_isListCliked[0])
+			{
+				_inventory->_equipSlot1->Render(_inventory->_equipSlot[0].GetCenter());
+				/*for (int i = 0; i < 15; i++)
+				{
+					if (!_inventory->_isListCliked[i])
+					{
+						_inventory->_equipSlot1->Render(_inventory->_equipSlot[0].GetCenter());
+						break;
+					} else _inventory->_equipSlot1->Render(_cursor);
+				}*/
+			} 
+			else if (_inventory->_isSlotCliked[0] && !_inventory->_isListCliked[0])
+			{
+				_inventory->_equipSlot1->Render(_cursor);
+				/*if (!_inventory->_isListCliked[0])
+				{
+					_inventory->_equipSlot1->Render(_cursor);
+				}
+				else _inventory->_equipSlot1->Render(_inventory->_equipSlot[0].GetCenter());*/
+			}
+				
+				
+		}
+		//_inventory->_equipSlot1->Render(_inventory->_equipSlot[0].GetCenter());
+
+		//if (_weapon->GetActive())
+		//{
+		//	if (_inventory->_isSlotCliked[0])
+		//	{
+		//		_inventory->_equipSlot1->Render(_inventory->_equipSlot[0].GetCenter());
+		//		/*for (int i = 0; i < 15; i++)
+		//		{
+		//			if (!_inventory->_isListCliked[i])
+		//			{
+		//				_inventory->_equipSlot1->Render(_cursor);
+		//			}
+		//			else
+		//				_inventory->_equipSlot1->Render(_inventory->_equipList[i].GetCenter());
+		//		}*/
+		//	}
+		//	else   //장비된 아이템 클릭 상태
+		//	{
+		//		for (int i = 0; i < 15; i++)
+		//		{
+		//			if (_inventory->_isListCliked[i])
+		//			{
+		//				_inventory->_equipSlot1->Render(_inventory->_equipList[i].GetCenter());
+		//				break;
+		//			}
+		//			//else _inventory->_equipSlot1->Render(_cursor);
+		//		}
+		//	}
+		//}
+	}
+	//if (_inventory->GetActive())
+	//{
+	//
+
+	//	/*if (!_inventory->_isSlotCliked && !_inventory->_isListCliked)
+	//		_inventory->_equipSlot1->Render(_inventory->_equipSlot[0].GetCenter());
+	//	else if (_inventory->_isSlotCliked && !_inventory->_isListCliked)
+	//		_inventory->_equipSlot1->Render(_cursor);
+	//	else if (_inventory->_isSlotCliked && _inventory->_isListCliked)
+	//	{
+	//		_inventory->_equipSlot1->Render(_inventory->_equipList[0].GetCenter());
+	//	}	*/	
+	//}
+
 	_D2DRenderer->FillRectangle(CAMERA->GetRelativeRect(_rect), D2DRenderer::DefaultBrush::White);
 	_D2DRenderer->DrawRectangle(CAMERA->GetRelativeRect(_rect), D2DRenderer::DefaultBrush::Black, 2.0f);
 	_playerImage->AniRender(CAMERA->GetRelativeVector2(_position), _playerAnimation, 6.5f);
@@ -160,14 +343,15 @@ void Player::Render()
 	if (!_weapon)
 		_D2DRenderer->RenderText(910, 800, L"무기 없음", 15);
 	else
+	{
 		_D2DRenderer->RenderText(910, 800, to_wstring(_weapon->_angle * 180 / 3.141592), 15);
+	}
 
-	//if (!_skel)
-	//{
-	//	//_D2DRenderer->RenderText(1010, 850, L"충돌 여부" + to_wstring(IsCollide(_rect, _monster->_attackRange)), 15);
-	//	_D2DRenderer->RenderText(50, 700, L"몬스터잇다다다다다닫", 15);
-	//}
-		
+	if (_inventory)
+	{
+		_D2DRenderer->RenderText(1210, 800, L"인벤있음", 15);
+		_D2DRenderer->RenderText(1310, 800, to_wstring(_inventory->GetActive()), 15);
+	}
 }
 
 void Player::Move(Vector2 moveDirection)
@@ -223,7 +407,7 @@ void Player::Operate()
 		Jump();
 	}
 
-	if (KEYMANAGER->IsOnceKeyDown(VK_LBUTTON))	//Mouse_R
+	if (KEYMANAGER->IsOnceKeyDown(VK_LBUTTON))	//Mouse_L
 	{
 		if (_weapon)
 			Attack(_weapon);
@@ -265,6 +449,17 @@ void Player::Operate()
 		}
 		break;
 	}
+	
+	if (KEYMANAGER->IsOnceKeyDown(0x56))	//V_inventory
+	{
+		if (_inventory)
+		{
+			if (_inventory->GetActive() == false)
+				_inventory->SetActive(true);
+			else
+				_inventory->SetActive(false);
+		}
+	}
 }
 
 bool Player::IsCollide(FloatRect _rect, FloatRect _rect2)
@@ -272,4 +467,11 @@ bool Player::IsCollide(FloatRect _rect, FloatRect _rect2)
 	if (_rect.right > _rect2.left && _rect.left < _rect2.right && _rect.top < _rect2.bottom && _rect.bottom > _rect2.top)
 		return true;
 	else return false;
+}
+
+bool Player::IsCollide(Vector2 _point, FloatRect _rect)
+{
+	if (_point.x > _rect.left && _point.x < _rect.right && _point.y < _rect.bottom && _point.y > _rect.top)
+		return true;
+	return false;
 }

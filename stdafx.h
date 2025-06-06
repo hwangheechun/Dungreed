@@ -44,8 +44,8 @@ using namespace std;
 #define WINNAME (LPCTSTR)(TEXT("D2D-Framework"))
 #define WINSTARTX	200
 #define WINSTARTY	50
-#define WINSIZEX	1600	
-#define WINSIZEY	900
+#define WINSIZEX	1920	
+#define WINSIZEY	1080
 #define WINSTYLE	WS_CAPTION | WS_SYSMENU
 
 #define RANDOM RandomFunction::GetInstance()
