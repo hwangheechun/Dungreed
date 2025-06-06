@@ -154,6 +154,7 @@
     <ClInclude Include="GameFramework\Utils.h" />
     <ClInclude Include="GameFramework\Vector2.h" />
     <ClInclude Include="PlayGround\Camera.h" />
+    <ClInclude Include="PlayGround\Inventory.h" />
     <ClInclude Include="PlayGround\MainScene.h" />
     <ClInclude Include="PlayGround\Monster.h" />
     <ClInclude Include="PlayGround\Player.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="PlayGround\PlayGround.h" />
     <ClInclude Include="PlayGround\Scene.h" />
     <ClInclude Include="PlayGround\Skeleton.h" />
+    <ClInclude Include="PlayGround\Tile.h" />
     <ClInclude Include="PlayGround\TownScene.h" />
     <ClInclude Include="PlayGround\UI.h" />
     <ClInclude Include="PlayGround\Weapon.h" />
@@ -188,6 +190,7 @@
     <ClCompile Include="GameFramework\Utils.cpp" />
     <ClCompile Include="GameFramework\Vector2.cpp" />
     <ClCompile Include="PlayGround\Camera.cpp" />
+    <ClCompile Include="PlayGround\Inventory.cpp" />
     <ClCompile Include="PlayGround\MainScene.cpp" />
     <ClCompile Include="PlayGround\Monster.cpp" />
     <ClCompile Include="PlayGround\Player.cpp" />
@@ -195,6 +198,7 @@
     <ClCompile Include="PlayGround\PlayGround.cpp" />
     <ClCompile Include="PlayGround\Scene.cpp" />
     <ClCompile Include="PlayGround\Skeleton.cpp" />
+    <ClCompile Include="PlayGround\Tile.cpp" />
     <ClCompile Include="PlayGround\TownScene.cpp" />
     <ClCompile Include="PlayGround\UI.cpp" />
     <ClCompile Include="PlayGround\Weapon.cpp" />

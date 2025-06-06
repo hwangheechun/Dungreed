@@ -58,6 +58,9 @@
     <Filter Include="PlayGround\Scene">
       <UniqueIdentifier>{d024aeea-6be4-4821-a1ee-9d43e39e990c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PlayGround\UI">
+      <UniqueIdentifier>{baf2e0b5-d606-44f1-b5a6-557e0c028718}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameFramework\D2DRenderer.h">
@@ -165,6 +168,12 @@
     <ClInclude Include="PlayGround\MainScene.h">
       <Filter>PlayGround\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="PlayGround\Tile.h">
+      <Filter>PlayGround</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround\Inventory.h">
+      <Filter>PlayGround\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameFramework\D2DRenderer+Draw.cpp">
@@ -265,6 +274,12 @@
     </ClCompile>
     <ClCompile Include="PlayGround\MainScene.cpp">
       <Filter>PlayGround\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\Tile.cpp">
+      <Filter>PlayGround</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\Inventory.cpp">
+      <Filter>PlayGround\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
