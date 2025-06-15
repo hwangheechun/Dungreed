@@ -19,6 +19,13 @@ HRESULT MainScene::Init()
 	UI* _ui = new UI();
 	OBJECTMANAGER->AddObject(ObjectType::UI, _ui);
 
+	/*for (int i = 0; i < 20; ++i) 
+	{
+		Bullet* bullet = new Bullet();
+
+		OBJECTMANAGER->AddObject(ObjectType::Bullet, bullet);
+	}*/
+
 	SCENEMANAGER->AddScene(L"TownScene", new TownScene());
 	SCENEMANAGER->ChangeScene(L"TownScene");
 

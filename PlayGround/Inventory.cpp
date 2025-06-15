@@ -69,26 +69,6 @@ void Inventory::Render()
 	//_D2DRenderer->FillRectangle(_rect, D2DRenderer::DefaultBrush::White);
 	_D2DRenderer->DrawRectangle(_rect, D2DRenderer::DefaultBrush::Black, 2.0f);
 	//_invenImage->Render(_position);
-
-
-	
-	/*_D2DRenderer->DrawRectangle(RectMakePivot(_position + Vector2(-180, 0), Vector2(80,80), Pivot::Center), D2DRenderer::DefaultBrush::Black, 2.0f);
-	_D2DRenderer->DrawRectangle(RectMakePivot(_position + Vector2(-90, 0), Vector2(80,80), Pivot::Center), D2DRenderer::DefaultBrush::Black, 2.0f);
-	_D2DRenderer->DrawRectangle(RectMakePivot(_position + Vector2(0, 0), Vector2(80,80), Pivot::Center), D2DRenderer::DefaultBrush::Black, 2.0f);
-	_D2DRenderer->DrawRectangle(RectMakePivot(_position + Vector2(90, 0), Vector2(80,80), Pivot::Center), D2DRenderer::DefaultBrush::Black, 2.0f);
-	_D2DRenderer->DrawRectangle(RectMakePivot(_position + Vector2(180, 0), Vector2(80,80), Pivot::Center), D2DRenderer::DefaultBrush::Black, 2.0f);
-
-	_D2DRenderer->DrawRectangle(RectMakePivot(_position + Vector2(-180, 90), Vector2(80, 80), Pivot::Center), D2DRenderer::DefaultBrush::Black, 2.0f);
-	_D2DRenderer->DrawRectangle(RectMakePivot(_position + Vector2(-90, 90), Vector2(80, 80), Pivot::Center), D2DRenderer::DefaultBrush::Black, 2.0f);
-	_D2DRenderer->DrawRectangle(RectMakePivot(_position + Vector2(0, 90), Vector2(80, 80), Pivot::Center), D2DRenderer::DefaultBrush::Black, 2.0f);
-	_D2DRenderer->DrawRectangle(RectMakePivot(_position + Vector2(90, 90), Vector2(80, 80), Pivot::Center), D2DRenderer::DefaultBrush::Black, 2.0f);
-	_D2DRenderer->DrawRectangle(RectMakePivot(_position + Vector2(180, 90), Vector2(80, 80), Pivot::Center), D2DRenderer::DefaultBrush::Black, 2.0f);
-
-	_D2DRenderer->DrawRectangle(RectMakePivot(_position + Vector2(-180, 180), Vector2(80, 80), Pivot::Center), D2DRenderer::DefaultBrush::Black, 2.0f);
-	_D2DRenderer->DrawRectangle(RectMakePivot(_position + Vector2(-90, 180), Vector2(80, 80), Pivot::Center), D2DRenderer::DefaultBrush::Black, 2.0f);
-	_D2DRenderer->DrawRectangle(RectMakePivot(_position + Vector2(0, 180), Vector2(80, 80), Pivot::Center), D2DRenderer::DefaultBrush::Black, 2.0f);
-	_D2DRenderer->DrawRectangle(RectMakePivot(_position + Vector2(90, 180), Vector2(80, 80), Pivot::Center), D2DRenderer::DefaultBrush::Black, 2.0f);
-	_D2DRenderer->DrawRectangle(RectMakePivot(_position + Vector2(180, 180), Vector2(80, 80), Pivot::Center), D2DRenderer::DefaultBrush::Black, 2.0f);*/
 	
 	for (int i = 0; i < 2; i++)
 	{
@@ -106,4 +86,16 @@ void Inventory::Render()
 	_D2DRenderer->RenderText(300, 350, L"크기기기 : " + to_wstring((int)_equipList[1]), 15);
 	_D2DRenderer->RenderText(300, 400, L"크기기기 : " + to_wstring((int)_equipList[2]), 15);
 	_D2DRenderer->RenderText(300, 400, L"크기기기 : " + to_wstring((int)_equipList[3]), 15);*/
+
+	if (_equipSlot1)
+		_equipSlot1->Render(_equipSlot[0].GetCenter());
+
+	if (_equipSlot2)
+		_equipSlot2->Render(_equipSlot[1].GetCenter());
+
+	for (int i = 0; i < 15; i++)
+	{
+		if (_equipListImage[i])
+			_equipListImage[i]->Render(_equipList[i].GetCenter());
+	}
 }
