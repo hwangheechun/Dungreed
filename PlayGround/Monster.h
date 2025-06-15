@@ -12,6 +12,7 @@ enum class MonsterState : int
 enum class MonsterType : int
 {
 	SKELETON,
+	BELIAL,
 };
 
 class Monster : public GameObject

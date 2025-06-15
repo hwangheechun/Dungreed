@@ -67,6 +67,28 @@ void Image::Render(const Vector2& position)
 	ResetRenderOption();
 }
 
+//좌우 반전 이미지 변환(2025/06/08)
+void Image::Render(const Vector2& position, bool _isLeft)
+{
+	Vector2 size = _size * _scale;
+
+	// SRT
+	// 스케일 행렬
+	//D2DRenderer::GetInstance()->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Scale(-1.f, 1.f));
+	D2D1::Matrix3x2F scaleMatrix = D2D1::Matrix3x2F::Scale((_isLeft ? _scale * -1.f : _scale * 1.f), _scale, D2D1::Point2F(0, 0));
+	// 회전 행렬
+	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(_angle, D2D1::Point2F(size.x / 2.f, size.y / 2.f));
+	// 이동 행렬
+	D2D1::Matrix3x2F translateMatrix = D2D1::Matrix3x2F::Translation(position.x - size.x / 2.f, position.y - size.y / 2.f);
+
+	D2D1_RECT_F dxArea = D2D1::RectF(0.f, 0.f, size.x, size.y);
+
+	D2DRenderer::GetInstance()->GetRenderTarget()->SetTransform(scaleMatrix * rotateMatrix * translateMatrix);
+
+	D2DRenderer::GetInstance()->GetRenderTarget()->DrawBitmap(_bitmap, dxArea, _alpha);
+	ResetRenderOption();
+}
+
 void Image::FrameRender(const Vector2& position, const int frameX, const int frameY)
 {
 	//현재 프레임 인덱스 
@@ -114,7 +136,7 @@ void Image::AniRender(const Vector2& position, Animation* ani, float scale)
 }
 
 //좌우 반전 이미지 변환(2025/05/22)
-void Image::AniRender(const Vector2& position, Animation* ani, float scale, bool isLeft)
+void Image::AniRender(const Vector2& position, Animation* ani, float scale, bool _isLeft)
 {
 	Vector2 tempFrameSize;
 	tempFrameSize.x = ani->GetFrameWidth();
@@ -122,7 +144,7 @@ void Image::AniRender(const Vector2& position, Animation* ani, float scale, bool
 
 	Vector2 size = tempFrameSize * scale;
 
-	D2D1::Matrix3x2F scaleMatrix = D2D1::Matrix3x2F::Scale((isLeft ? scale * -1.f : scale * 1.f), scale, D2D1::Point2F(0, 0));
+	D2D1::Matrix3x2F scaleMatrix = D2D1::Matrix3x2F::Scale((_isLeft ? scale * -1.f : scale * 1.f), scale, D2D1::Point2F(0, 0));
 	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(_angle, D2D1::Point2F(size.x / 2.f, size.y / 2.f));
 	D2D1::Matrix3x2F translateMatrix = D2D1::Matrix3x2F::Translation((position.x - size.x / 2.f), (position.y - size.y / 2.f));//(position.x - size.x / 2.f, position.y - size.y / 2.f ); // 중점 ??
 

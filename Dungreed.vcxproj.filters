@@ -61,6 +61,9 @@
     <Filter Include="PlayGround\UI">
       <UniqueIdentifier>{baf2e0b5-d606-44f1-b5a6-557e0c028718}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PlayGround\Weapon">
+      <UniqueIdentifier>{3e734b36-0782-42a8-bbcd-de3bed7a9f28}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameFramework\D2DRenderer.h">
@@ -138,13 +141,7 @@
     <ClInclude Include="PlayGround\PlayGround.h">
       <Filter>PlayGround</Filter>
     </ClInclude>
-    <ClInclude Include="PlayGround\Scene.h">
-      <Filter>PlayGround</Filter>
-    </ClInclude>
     <ClInclude Include="PlayGround\Camera.h">
-      <Filter>PlayGround</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayGround\UI.h">
       <Filter>PlayGround</Filter>
     </ClInclude>
     <ClInclude Include="PlayGround\Player.h">
@@ -154,9 +151,6 @@
       <Filter>PlayGround</Filter>
     </ClInclude>
     <ClInclude Include="PlayGround\Weapon.h">
-      <Filter>PlayGround</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayGround\Monster.h">
       <Filter>PlayGround</Filter>
     </ClInclude>
     <ClInclude Include="PlayGround\Skeleton.h">
@@ -173,6 +167,21 @@
     </ClInclude>
     <ClInclude Include="PlayGround\Inventory.h">
       <Filter>PlayGround\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround\Belial.h">
+      <Filter>PlayGround\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround\Monster.h">
+      <Filter>PlayGround\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround\Scene.h">
+      <Filter>PlayGround\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround\UI.h">
+      <Filter>PlayGround\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround\Bullet.h">
+      <Filter>PlayGround\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -245,13 +254,7 @@
     <ClCompile Include="PlayGround\PlayGround.cpp">
       <Filter>PlayGround</Filter>
     </ClCompile>
-    <ClCompile Include="PlayGround\Scene.cpp">
-      <Filter>PlayGround</Filter>
-    </ClCompile>
     <ClCompile Include="PlayGround\Camera.cpp">
-      <Filter>PlayGround</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayGround\UI.cpp">
       <Filter>PlayGround</Filter>
     </ClCompile>
     <ClCompile Include="PlayGround\Player.cpp">
@@ -261,9 +264,6 @@
       <Filter>PlayGround</Filter>
     </ClCompile>
     <ClCompile Include="PlayGround\Weapon.cpp">
-      <Filter>PlayGround</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayGround\Monster.cpp">
       <Filter>PlayGround</Filter>
     </ClCompile>
     <ClCompile Include="PlayGround\Skeleton.cpp">
@@ -280,6 +280,21 @@
     </ClCompile>
     <ClCompile Include="PlayGround\Inventory.cpp">
       <Filter>PlayGround\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\Belial.cpp">
+      <Filter>PlayGround\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\Monster.cpp">
+      <Filter>PlayGround\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\Scene.cpp">
+      <Filter>PlayGround\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\UI.cpp">
+      <Filter>PlayGround\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\Bullet.cpp">
+      <Filter>PlayGround\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

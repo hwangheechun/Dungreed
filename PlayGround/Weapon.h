@@ -2,7 +2,11 @@
 #include "GameObject.h"
 #include "Player.h"
 
-class Player;	//오류 발생
+enum class WeaponType : int
+{
+	SWORD,
+	GATLINGGUN,
+};
 
 class Weapon : public GameObject
 {
@@ -22,5 +26,7 @@ public:
 	Vector2 _direction;
 
 	Image* _weaponImage = nullptr;
+
+	WeaponType _weaponType;
 };
 

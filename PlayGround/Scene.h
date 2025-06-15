@@ -1,6 +1,7 @@
 #pragma once
 #include "GameNode.h"
 #include "Skeleton.h"
+#include "Belial.h"
 #include "Tile.h"
 
 class Scene : public GameNode

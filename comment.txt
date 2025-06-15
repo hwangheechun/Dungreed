@@ -11,3 +11,58 @@ _D2DRenderer->RenderText(50, 520, L"해골:" + to_wstring((int)_skeletonImage->Get
 	//_D2DRenderer->RenderText(300, 325, L"image wichi : " + to_wstring((int)), 15);
 	//_D2DRenderer->RenderText(300, 350, L"재생 : " + to_wstring((int)_skeletonAnimation->IsPlaying()), 15);
 	//_D2DRenderer->RenderText(300, 375, L"인덱스 : " + to_wstring((int)_skeletonAnimation->), 15);
+
+
+
+
+
+	
+	
+
+	//if (_inventory->_isSlotCliked)	//장비 슬롯 클릭
+	//{
+	//	for (int i = 0; i < 15; i++)
+	//	{
+	//		if (IsCollide(_cursor, _inventory->_equipList[i]))	
+	//		{
+	//			if (KEYMANAGER->IsOnceKeyDown(0x47))	//목록 클릭 시
+	//			{
+	//				
+	//				_inventory->_isListCliked = false;
+	//				_inventory->_isSlotCliked = false;
+	//			}
+	//		}
+	//	}
+	//}
+	//else
+	//{
+	//	for (int i = 0; i < 15; i++)
+	//	{
+	//		if (IsCollide(_cursor, _inventory->_equipList[i]))
+	//		{
+	//			if (KEYMANAGER->IsOnceKeyDown(0x47))
+	//			{
+	//				_inventory->_isListCliked = false;
+	//				_inventory->_isSlotCliked = false;
+	//			}
+	//		}
+	//	}
+	//}
+
+	//if (_weapon)
+	//{
+	//	/*if (_inventory->_isSlotCliked[0] == false)
+	//		_weapon->SetActive(false);*/
+	//}
+
+	//if (_inventory->GetActive())
+	//{
+	//	if (!_inventory->_isSlotCliked && !_inventory->_isListCliked)	//아무 것도 안 클릭 시
+	//		_inventory->_equipSlot1->Render(_inventory->_equipSlot[0].GetCenter());
+	//	else if (_inventory->_isSlotCliked && !_inventory->_isListCliked)	//무기 슬롯 클릭 시 
+	//		_inventory->_equipSlot1->Render(_cursor);
+	//	else if (_inventory->_isSlotCliked && _inventory->_isListCliked)	//
+	//	{
+	//		_inventory->_equipSlot1->Render(_inventory->_equipList[0].GetCenter());
+	//	}
+	//}

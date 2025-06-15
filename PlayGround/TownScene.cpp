@@ -10,7 +10,10 @@ HRESULT TownScene::Init()
 	Skeleton* skeleton = new Skeleton();
 	OBJECTMANAGER->AddObject(ObjectType::Enemy, skeleton);
 
-	_townBackGround = IMAGEMANAGER->AddImage(L"townBackground", L"Resources/TownBG.png");
+	Belial* belial = new Belial();
+	OBJECTMANAGER->AddObject(ObjectType::Enemy, belial);
+
+	//_townBackGround = IMAGEMANAGER->AddImage(L"townBackground", L"Resources/TownBG.png");
 
 	return S_OK;
 }

@@ -51,6 +51,7 @@ public:
 	void AniRender(const Vector2& position, Animation* ani, float scale);
 
 	//추가
+	void Render(const Vector2& position, bool _isLeft);
 	void AniRender(const Vector2& position, Animation* ani, float scale, bool _isLeft);
 
 	// 이미지 클래스 렌더 관련 옵션들 전부 초기화
