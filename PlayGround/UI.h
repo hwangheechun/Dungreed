@@ -14,6 +14,7 @@ public:
 	void Update() override;
 	void Render() override;
 
+	Vector2 _cursor;
 	Image* _playerHP = nullptr;
 	Image* _dashCount = nullptr;
 	Image* _mouseCursor = nullptr;

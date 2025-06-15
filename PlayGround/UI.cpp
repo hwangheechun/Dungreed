@@ -35,6 +35,9 @@ void UI::Release()
 
 void UI::Update()
 {
+	_cursor.x = _ptMouse.x;
+	_cursor.y = _ptMouse.y;
+
 	_inventory = dynamic_cast<Inventory*>(OBJECTMANAGER->FindObject(ObjectType::UI, L"Inventory"));
 
 	if (_inventory)
