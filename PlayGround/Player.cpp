@@ -49,23 +49,41 @@ void Player::Release()
 
 void Player::Update()
 {
+#pragma region 찾기
+	//인벤토리 찾기
+	_inventory = dynamic_cast<Inventory*>(OBJECTMANAGER->FindObject(ObjectType::UI, L"Inventory"));	//캐릭터가 인벤토리보다 먼저 생성되서 init에서 찾아봐야 안 나온다
+
+	//무기 찾기
+	_weapon = dynamic_cast<Weapon*>(OBJECTMANAGER->FindObject(ObjectType::Item, L"Weapon"));	//캐릭터가 무기보다 먼저 생성되서 init에서 찾아봐야 안 나온다
+
+	//UI 찾기
+	_ui = dynamic_cast<UI*>(OBJECTMANAGER->FindObject(ObjectType::UI, L"UI"));
+
+	//총알 찾기
+	_bullet = OBJECTMANAGER->FindObjects(ObjectType::Bullet, L"Bullet");
+#pragma endregion
+#pragma region 무기
 	if (_weapon)
 	{
+		if (_isLeft)
+			_weapon->SetPosition(Vector2(_position.x - _size.x / 3, _position.y));
+		else
+			_weapon->SetPosition(Vector2(_position.x + _size.x / 3, _position.y));
+
+		_weapon->_direction.x = _ui->_cursor.x - CAMERA->GetRelativeVector2(_position).x;
+		_weapon->_direction.y = _ui->_cursor.y - CAMERA->GetRelativeVector2(_position).y;
+
 		if (_weapon->_angle * 180 / 3.141592 < 0 && _isLeft == false)
 			_weapon->_weaponImage->SetAngle(_weapon->_angle * 180 / 3.141592);
 		else if (_weapon->_angle * 180 / 3.141592 < 0 && _isLeft == true)
 			_weapon->_weaponImage->SetAngle(-180 + _weapon->_angle * 180 / 3.141592);
 		else if (_weapon->_angle * 180 / 3.141592 > 0 && _isLeft == false)
 			_weapon->_weaponImage->SetAngle(_weapon->_angle * 180 / 3.141592);
-		else
+		else if (_weapon->_angle * 180 / 3.141592 > 0 && _isLeft == true)
 			_weapon->_weaponImage->SetAngle(-180 + _weapon->_angle * 180 / 3.141592);
 	}
-
-#pragma region 기타 환경
-	//커서
-	_cursor.x = _ptMouse.x;
-	_cursor.y = _ptMouse.y;
-
+#pragma endregion
+#pragma region 중력, 애니메이션 업데이트
 	//중력
 	_gravity += 50.f;
 
@@ -76,29 +94,21 @@ void Player::Update()
 
 	if (_position.y + _size.y / 2 >= WINSIZEY)
 	{
-		_isOnGround = true;		
+		_isOnGround = true;
 	}
 
 	//애니메이션 업데이트
 	_playerIdle->FrameUpdate(TIMEMANAGER->GetElapsedTime());
 	_playerRun->FrameUpdate(TIMEMANAGER->GetElapsedTime());
 
-	//인벤토리 찾기
-	_inventory = dynamic_cast<Inventory*>(OBJECTMANAGER->FindObject(ObjectType::UI, L"Inventory"));	//캐릭터가 인벤토리보다 먼저 생성되서 init에서 찾아봐야 안 나온다
-
-	//무기 찾기
-	_weapon = dynamic_cast<Weapon*>(OBJECTMANAGER->FindObject(ObjectType::Item, L"Weapon"));	//캐릭터가 무기보다 먼저 생성되서 init에서 찾아봐야 안 나온다
-	if (_inventory && _weapon)
-	{
-		_weapon->SetActive(true);
-		_inventory->_equipSlot1 = _weapon->_weaponImage;
-	}
-
-	_bullet = OBJECTMANAGER->FindObjects(ObjectType::Bullet, L"Bullet");
+	//if (_inventory && _weapon)
+	//{
+	//	_weapon->SetActive(true);
+	//	_inventory->_equipSlot1 = _weapon->_weaponImage;
+	//}
 #pragma endregion
-	
 #pragma region 캐릭터 동작
-	Operate();	
+	Operate();
 #pragma endregion
 
 	switch (_playerState)
@@ -112,6 +122,7 @@ void Player::Update()
 		_playerImage = IMAGEMANAGER->FindImage(L"run");
 		break;
 	}
+
 	//if (_inventory->GetActive())
 	//{
 	//	//if(!_isItemClicked && _inventory->_equipSlot1)		//장비가 있고 클릭이 안 되었다면
@@ -152,42 +163,55 @@ void Player::Update()
 	//		}
 	//	}
 
-	if (_inventory)
+	//if (_inventory)
+	//{
+	//	for (int i = 0; i < 15; i++)	//장비 목록
+	//	{
+	//		if (IsCollide(_cursor, _inventory->_equipList[i]))
+	//		{
+	//			if (KEYMANAGER->IsOnceKeyDown(0x47))	//Mouse_L	//G
+	//			{
+	//				if (!_inventory->_equipListImage[i])
+	//				{
+	//					_isItemClicked = false;
+	//					_inventory->_equipSlot1 = nullptr;
+	//				}
+	//				if (_inventory->_isListCliked[i] == true)
+	//					_inventory->_isListCliked[i] = false;
+	//				else
+	//				{
+	//					_inventory->_isListCliked[i] = true;
+	//					_inventory->_isSlotCliked[0] = false;
+	//					_inventory->_isSlotCliked[1] = false;
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
+
+	for (int i = 0; i < _bullet.size(); i++)
 	{
-		for (int i = 0; i < 15; i++)	//장비 목록
-		{
-			if (IsCollide(_cursor, _inventory->_equipList[i]))
-			{
-				if (KEYMANAGER->IsOnceKeyDown(0x47))	//Mouse_L	//G
-				{
-					if (!_inventory->_equipListImage[i])
-					{
-						_isItemClicked = false;
-						_inventory->_equipSlot1 = nullptr;
-					}
-					if (_inventory->_isListCliked[i] == true)
-						_inventory->_isListCliked[i] = false;
-					else
-					{
-						_inventory->_isListCliked[i] = true;
-						_inventory->_isSlotCliked[0] = false;
-						_inventory->_isSlotCliked[1] = false;
-					}
-				}
-			}
-		}
+		if (dynamic_cast<Bullet*>(_bullet[i])->_isFire)
+			dynamic_cast<Bullet*>(_bullet[i])->Move(Vector2(WINSIZEX, 0));
+
+
+		
+			if (!dynamic_cast<Bullet*>(_bullet[i])->GetActive())
+				dynamic_cast<Bullet*>(_bullet[i])->SetPosition(_position);
+		
 	}
 }
 
+
 void Player::Render()
 {
-	if (_inventory && _inventory->GetActive())
+	/*if (_inventory && _inventory->GetActive())
 	{
 		for (int i = 0; i < 2; i++)
 			_D2DRenderer->RenderText(1350 + i * 100, 200, to_wstring((int)_inventory->_isSlotCliked[i]), 15);
 		for (int i = 0; i < 15; i++)
 			_D2DRenderer->RenderText(1350 + i * 20, 250, to_wstring((int)_inventory->_isListCliked[i]), 15);
-	}
+	}*/
 
 	//캐릭터 히트박스
 	_D2DRenderer->FillRectangle(CAMERA->GetRelativeRect(_rect), D2DRenderer::DefaultBrush::White);
@@ -205,10 +229,11 @@ void Player::Render()
 	case PlayerState::RUN:
 		if (!_playerImage) return;
 		if (_isLeft)
-			_playerImage->AniRender(CAMERA->GetRelativeVector2(_position + Vector2(90, 0)), _playerRun, 6.5f, _isLeft);
+			_playerImage->AniRender(CAMERA->GetRelativeVector2(_position + Vector2(104, 0)), _playerRun, 6.5f, _isLeft);
 		else _playerImage->AniRender(CAMERA->GetRelativeVector2(_position + Vector2(8, 0)), _playerRun, 6.5f, _isLeft);
 		break;
 	}
+
 	//if (_inventory->GetActive())
 	//{
 	//	if (_weapon->GetActive())
@@ -281,11 +306,12 @@ void Player::Render()
 	//		_inventory->_equipSlot1->Render(_inventory->_equipList[0].GetCenter());
 	//	}	*/	
 	//}
-	
+	_D2DRenderer->DrawLine(CAMERA->GetRelativeVector2(_weapon->GetPosition()), _ui->_cursor);
 #pragma region 플레이어 정보 텍스트
 	
-	_D2DRenderer->RenderText(1550, 90, L"아이템 잡힘 상태" + to_wstring((int)_isItemClicked), 15);
-	_D2DRenderer->RenderText(1550, 190, L"아이템 잡힘 상태" + to_wstring((float)_weapon->_angle * 180 / 3.141592), 15);
+	//_D2DRenderer->RenderText(1550, 90, L"아이템 잡힘 상태" + to_wstring((int)_isItemClicked), 15);
+	if(_weapon)
+	_D2DRenderer->RenderText(1550, 190, L"아이템 잡힘 상태" + to_wstring(_position.x - _weapon->GetPosition().x), 15);
 	//캐릭터 위치 좌표
 	_D2DRenderer->RenderText(550, 10, L"캐릭터 위치:" + to_wstring((int)CAMERA->GetRelativeVector2(_position).x), 15);
 	_D2DRenderer->RenderText(700, 10, to_wstring((int)CAMERA->GetRelativeVector2(_position).y), 15);
@@ -301,10 +327,10 @@ void Player::Render()
 	_D2DRenderer->RenderText(250, 675, to_wstring((int)CAMERA->GetPosition().y), 15);
 
 	//마우스 위치 좌표
-	_D2DRenderer->RenderText(600, 30, L"마우스 : " + to_wstring((int)_cursor.x), 15);
-	_D2DRenderer->RenderText(700, 30, to_wstring((int)_cursor.y), 15);
-	_D2DRenderer->RenderText(600, 60, L"캐릭터로부터 마우스 : " + to_wstring((int)(_cursor.x - CAMERA->GetRelativeVector2(_position).x)), 15);
-	_D2DRenderer->RenderText(800, 60, to_wstring((int)(_cursor.y - CAMERA->GetRelativeVector2(_position).y)), 15);
+	_D2DRenderer->RenderText(600, 30, L"마우스 : " + to_wstring((int)_ui->_cursor.x), 15);
+	_D2DRenderer->RenderText(700, 30, to_wstring((int)_ui->_cursor.y), 15);
+	_D2DRenderer->RenderText(600, 60, L"캐릭터로부터 마우스 : " + to_wstring((int)(_ui->_cursor.x - CAMERA->GetRelativeVector2(_position).x)), 15);
+	_D2DRenderer->RenderText(800, 60, to_wstring((int)(_ui->_cursor.y - CAMERA->GetRelativeVector2(_position).y)), 15);
 
 	switch (_playerState)
 	{
@@ -335,15 +361,12 @@ void Player::Render()
 	else
 		_D2DRenderer->RenderText(550, 45, L"우 : " + to_wstring(_isLeft), 15);
 
-	//_D2DRenderer->RenderText(210, 800, to_wstring(_isDash + 125), 15);
 	_D2DRenderer->RenderText(410, 800, to_wstring(_isSlashDown), 15);
 
 	if (!_weapon)
 		_D2DRenderer->RenderText(910, 800, L"무기 없음", 15);
-	else
-	{
-		_D2DRenderer->RenderText(910, 800, to_wstring(_weapon->_angle * 180 / 3.141592), 15);
-	}
+
+	
 
 	if (_inventory)
 	{
@@ -351,8 +374,28 @@ void Player::Render()
 		_D2DRenderer->RenderText(1310, 800, to_wstring(_inventory->GetActive()), 15);
 	}
 
-	if(_bullet[0])
-		_D2DRenderer->RenderText(1410, 800, L"음", 15);
+	//if(_bullet[0])
+	//	_D2DRenderer->RenderText(1410, 800, L"음", 15);
+	for (int i = 0; i < 20; i++)
+	{
+		_D2DRenderer->RenderText(100, 700 + i * 15, to_wstring(_bullet[i]->GetPosition().x), 15);
+		_D2DRenderer->RenderText(300, 700 + i * 15, to_wstring(_bullet[i]->GetPosition().y), 15);
+	}
+
+
+
+	for (int i = 0; i < 20; i++)
+	{
+		//if (pObj->GetActive())
+		//	continue;
+		//pObj->Init();
+		//pObj->SetActive(true);
+
+		auto pBulletObj = dynamic_cast<Bullet*>(_bullet[i]);
+
+		_D2DRenderer->RenderText(400, 700 + i * 15, L"발사?" + to_wstring(pBulletObj->_isFire), 15);
+		_D2DRenderer->RenderText(500, 700 + i * 15, L"보임?" + to_wstring(pBulletObj->GetActive()), 15);
+	}	
 #pragma endregion
 	
 }
@@ -369,17 +412,17 @@ void Player::Jump()
 	_gravity = -1200.0f;
 }
 
-void Player::Dash()
-{
-	_isDash = true;
-	_isOnGround = false;
-	_isSlashDown = false;
-	_gravity = -200.0f;
-
-	if (_position != Vector2((float)_ptMouse.x, (float)_ptMouse.y))
-		_position += (Vector2((float)_ptMouse.x, (float)_ptMouse.y) - _position);
-	_rect = RectMakePivot(_position, _size, Pivot::Center);
-}
+//void Player::Dash()
+//{
+//	_isDash = true;
+//	_isOnGround = false;
+//	_isSlashDown = false;
+//	_gravity = -200.0f;
+//
+//	if (_position != Vector2((float)_ptMouse.x, (float)_ptMouse.y))
+//		_position += (Vector2((float)_ptMouse.x, (float)_ptMouse.y) - _position);
+//	_rect = RectMakePivot(_position, _size, Pivot::Center);
+//}
 
 void Player::Attack(Weapon* weapon)
 {
@@ -393,6 +436,50 @@ void Player::Attack(Weapon* weapon)
 		case WeaponType::SWORD:
 			break;
 		case WeaponType::GATLINGGUN:
+			for (auto pObj : _bullet) {	//벡터 반복문
+				if (pObj->GetActive())
+					continue;
+				pObj->Init();
+				pObj->SetActive(true);
+
+				auto pBulletObj = dynamic_cast<Bullet*>(pObj);
+
+				pBulletObj->_isFire = true;
+
+				break;
+			}
+
+			/*for (auto pObj : _bullet) 
+			{	
+				if (pObj->GetActive())
+					continue;
+				dynamic_cast<Bullet*>(pObj)->Init();
+				dynamic_cast<Bullet*>(pObj)->_isFire = true;
+				dynamic_cast<Bullet*>(pObj)->SetActive(true);
+			}*/
+			/*for (int i = 0; i < 20; i++)
+			{
+				if (_bullet[i]->GetActive())
+					continue;
+
+				_bullet[i]->SetActive(true);
+			}*/
+				
+			//for (auto pObj : _bullet)
+			//{
+			//	//if (pObj->GetActive())
+			//	//	continue;
+			//	//pObj->Init();
+			//	//pObj->SetActive(true);
+
+			//	auto pBulletObj = dynamic_cast<Bullet*>(pObj);
+
+			//	pBulletObj->_isFire = true;
+			//	pBulletObj->Move(Vector2(650.f, 0.f));
+
+			//	break;
+			//}
+			
 			//if (KEYMANAGER->IsOnceKeyDown(VK_LBUTTON))	//Mouse_L
 			//{
 			//	for (auto pObj : _bullet)
@@ -435,24 +522,46 @@ void Player::Operate()
 	}
 #pragma endregion
 
-	if (KEYMANAGER->IsOnceKeyDown(VK_LBUTTON))	//Mouse_L
+	switch (_weapon->_weaponType)
 	{
-		if (!_inventory->GetActive())
+	case WeaponType::SWORD:
+		break;
+	case WeaponType::GATLINGGUN:
+		if (KEYMANAGER->IsStayKeyDown(VK_LBUTTON))
 		{
-			if (_weapon)
-				Attack(_weapon);
+			for (auto pObj : _bullet) {	//벡터 반복문
+				if (pObj->GetActive())
+					continue;
+				pObj->Init();
+				pObj->SetActive(true);
+
+				auto pBulletObj = dynamic_cast<Bullet*>(pObj);
+
+				pBulletObj->_isFire = true;
+
+				break;
+			}
 		}
 	}
 
+	//if (KEYMANAGER->IsOnceKeyDown(VK_LBUTTON))	//Mouse_L
+	//{
+	//	if (!_inventory->GetActive())
+	//	{
+	//		if (_weapon)
+	//			Attack(_weapon);
+	//	}
+	//}
+
 	if (KEYMANAGER->IsOnceKeyDown(VK_RBUTTON))	//Mouse_R
 	{
-		Dash();
+		//Dash();
 	}
 
 	switch (_playerState)
 	{
 	case PlayerState::IDLE:
-		if (_cursor.x - CAMERA->GetRelativeVector2(_position).x < 0)
+		if (_ui->_cursor.x - CAMERA->GetRelativeVector2(_position).x < 0)
 		{
 			_isLeft = true;
 		}
@@ -462,7 +571,7 @@ void Player::Operate()
 		}
 		break;
 	case PlayerState::RUN:
-		if (_cursor.x - CAMERA->GetRelativeVector2(_position).x < 0)
+		if (_ui->_cursor.x - CAMERA->GetRelativeVector2(_position).x < 0)
 		{
 			_isLeft = true;
 		}
@@ -484,21 +593,13 @@ void Player::Operate()
 		}
 	}
 
-	if (_inventory && _weapon)
+	if (KEYMANAGER->IsOnceKeyDown(0x4A))	//V_inventory
 	{
-		if (KEYMANAGER->IsOnceKeyDown(0x31))
-		{
-			_weapon->_weaponType = WeaponType::SWORD;
-		}
-		else if (KEYMANAGER->IsOnceKeyDown(0x32))
-		{
-			_weapon->_weaponType = WeaponType::GATLINGGUN;
-		}
+		SCENEMANAGER->ChangeScene(L"DungeonScene");
 	}
-	//if (_inventory->_equipSlot1)
-	//{
-	//	_weapon->_weaponImage = _inventory->_equipSlot1;
 
+	//if (_inventory && _weapon)
+	//{
 	//	if (KEYMANAGER->IsOnceKeyDown(0x31))
 	//	{
 	//		_weapon->_weaponType = WeaponType::SWORD;
@@ -507,6 +608,19 @@ void Player::Operate()
 	//	{
 	//		_weapon->_weaponType = WeaponType::GATLINGGUN;
 	//	}
+	//}
+	//if (_inventory->_equipSlot1)
+	//{
+	//	_weapon->_weaponImage = _inventory->_equipSlot1;
+
+		if (KEYMANAGER->IsOnceKeyDown(0x31))
+		{
+			_weapon->_weaponType = WeaponType::SWORD;
+		}
+		else if (KEYMANAGER->IsOnceKeyDown(0x32))
+		{
+			_weapon->_weaponType = WeaponType::GATLINGGUN;
+		}
 	//	//	//if (!_isSlashDown)
 	//	//	//{
 	//	//	//	if (_weapon->_angle * 180 / 3.141592 < 0 && _isLeft == false)	//1사분면
