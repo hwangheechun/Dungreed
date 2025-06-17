@@ -1,6 +1,5 @@
 #pragma once
 #include "GameObject.h"
-#include "Player.h"
 
 enum class WeaponType : int
 {
@@ -19,8 +18,7 @@ public:
 	void Update() override;
 	void Render() override;
 
-	Player* _player = nullptr;
-
+	void SetPosition(Vector2 _pos);
 	void MoveAngle(float angle);
 	float _angle;
 	Vector2 _direction;

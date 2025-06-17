@@ -1,7 +1,5 @@
 #pragma once
 #include "Scene.h"
-#include "player.h"
-#include "UI.h"
 
 class TownScene : public Scene
 {

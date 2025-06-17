@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
-#include "player.h"
-#include "Inventory.h"
+//#include "player.h"
+//#include "Inventory.h"
 
 class UI : public GameObject
 {
@@ -21,7 +21,7 @@ public:
 
 	FloatRect _HPGauge;
 
-	Player* _player = nullptr;
-	Inventory* _inventory = nullptr;
+	//Player* _player = nullptr;
+	//Inventory* _inventory = nullptr;
 };
 

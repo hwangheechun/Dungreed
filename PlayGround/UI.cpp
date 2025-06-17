@@ -18,7 +18,7 @@ void UI::Init()
 	_size = Vector2(340, 70);
 	_rect = RectMakePivot(_position, _size, Pivot::Center);	// 히트박스
 	_active = true;
-	_player = dynamic_cast<Player*>(OBJECTMANAGER->FindObject(ObjectType::Player, L"Player"));
+	//_player = dynamic_cast<Player*>(OBJECTMANAGER->FindObject(ObjectType::Player, L"Player"));
 	
 	_playerHP = IMAGEMANAGER->AddImage(L"playerHP", L"Resources/PlayerHP.png");
 	_dashCount = IMAGEMANAGER->AddImage(L"dashCount", L"Resources/DashCount_2.png");
@@ -38,15 +38,15 @@ void UI::Update()
 	_cursor.x = _ptMouse.x;
 	_cursor.y = _ptMouse.y;
 
-	_inventory = dynamic_cast<Inventory*>(OBJECTMANAGER->FindObject(ObjectType::UI, L"Inventory"));
+	//_inventory = dynamic_cast<Inventory*>(OBJECTMANAGER->FindObject(ObjectType::UI, L"Inventory"));
 
-	if (_inventory)
+	/*if (_inventory)
 	{
 		if (_inventory->GetActive())
 			_mouseCursor = IMAGEMANAGER->AddImage(L"basicCursor", L"Resources/BasicCursor.png");
 		else
 			_mouseCursor = IMAGEMANAGER->AddImage(L"cursor", L"Resources/Cursor.png");
-	}
+	}*/
 }
 
 void UI::Render()
@@ -59,9 +59,9 @@ void UI::Render()
 
 	_mouseCursor->Render(Vector2((float)_ptMouse.x, (float)_ptMouse.y));
 
-	FloatRect _HPBar{ _HPGauge.left, _HPGauge.top, _HPGauge.left + _HPGauge.GetWidth() * _player->_hp / _player->_maxHP, _HPGauge.bottom };
+	//FloatRect _HPBar{ _HPGauge.left, _HPGauge.top, _HPGauge.left + _HPGauge.GetWidth() * _player->_hp / _player->_maxHP, _HPGauge.bottom };
 
-	_D2DRenderer->FillRectangle(_HPBar, D2DRenderer::DefaultBrush::Red);
-	_D2DRenderer->DrawRectangle(_HPGauge, D2DRenderer::DefaultBrush::Black, 1.0f);
+	//_D2DRenderer->FillRectangle(_HPBar, D2DRenderer::DefaultBrush::Red);
+	//_D2DRenderer->DrawRectangle(_HPGauge, D2DRenderer::DefaultBrush::Black, 1.0f);
 	
 }

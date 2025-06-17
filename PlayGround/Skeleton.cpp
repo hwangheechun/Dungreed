@@ -91,7 +91,7 @@ void Skeleton::Update()
 			_attackRange = RectMakePivot(_position + Vector2(90.f, 0.f), Vector2(260, 140), Pivot::Center);
 
 		if (_skeletonAttack->_nowPlayIndex == 3 || _skeletonAttack->_nowPlayIndex == 4 && IsCollide(_attackRange, _player->GetRect()))
-			_player->_hp -= 3 * TIMEMANAGER->GetElapsedTime();
+			//_player->_hp -= 3 * TIMEMANAGER->GetElapsedTime();
 		break;
 	}
 }
@@ -109,7 +109,7 @@ void Skeleton::Render()
 			_skeletonImage->AniRender(CAMERA->GetRelativeVector2(_position + Vector2(190, 0)), _skeletonIdle, 5.5f, _isLeft);
 		else
 			_skeletonImage->AniRender(CAMERA->GetRelativeVector2(_position + Vector2(-10, 0)), _skeletonIdle, 5.5f, _isLeft);
-		_D2DRenderer->RenderText(1000, 720, L"서있는상태", 15);
+		_D2DRenderer->RenderText(CAMERA->GetRelativeVector2(_position).x, CAMERA->GetRelativeVector2(_position).y -100, L"서있는상태", 15);
 		break;
 	case MonsterState::ATTACK:
 		if (!_skeletonImage) return;
@@ -120,7 +120,7 @@ void Skeleton::Render()
 
 		if(_skeletonAttack->_nowPlayIndex == 3 || _skeletonAttack->_nowPlayIndex == 4)
 			_D2DRenderer->DrawRectangle(CAMERA->GetRelativeRect(_attackRange), D2DRenderer::DefaultBrush::Black, 2.0f);
-		_D2DRenderer->RenderText(1000, 720, L"공격하는상태", 15);
+		_D2DRenderer->RenderText(CAMERA->GetRelativeVector2(_position).x, CAMERA->GetRelativeVector2(_position).y - 100, L"공격하는상태", 15);
 		break;
 	}
 

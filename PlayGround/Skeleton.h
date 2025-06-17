@@ -1,8 +1,6 @@
 #pragma once
 #include "Monster.h"
 
-class Player;
-
 class Skeleton : public Monster
 {
 public:
@@ -14,6 +12,7 @@ public:
 	void Update() override;
 	void Render() override;
 
+	//¿ÃπÃ¡ˆ
 	Image* _skeletonImage = nullptr;
 	Image* _skeletonIdleImage = nullptr;
 	Image* _skeletonAttackImage = nullptr;
@@ -21,6 +20,5 @@ public:
 	Animation* _skeletonAttack = nullptr;
 
 	bool _isAttack = false;
-	bool _isLeft = false;
 };
 

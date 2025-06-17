@@ -1,6 +1,9 @@
 #pragma once
 #include "GameObject.h"
+#include "Weapon.h"
 #include "Inventory.h"
+#include "UI.h"
+#include "Bullet.h"
 
 enum class PlayerState : int
 {
@@ -20,15 +23,6 @@ public:
 	void Update() override;
 	void Render() override;
 
-	Vector2 _cursor;
-
-	//동작
-	void Move(Vector2 moveDirection);
-	void Jump();
-	void Dash();
-	void Attack(Weapon* weapon);
-	void Operate();
-
 	//이미지
 	Image* _playerImage = nullptr;
 	Animation* _playerIdle = nullptr;
@@ -47,15 +41,23 @@ public:
 
 	Weapon* _weapon = nullptr;
 	Inventory* _inventory = nullptr;
-	bool _isItemClicked = false;
+	UI* _ui = nullptr;
+	//bool _isItemClicked = false;
 	vector<GameObject*> _bullet;
-
-	//충돌
-	bool IsCollide(FloatRect _rect, FloatRect _rect2);
-	bool IsCollide(Vector2 _point, FloatRect _rect);
 
 	//체력 
 	float _maxHP = 80.f;
 	float _hp = 80.f;
+
+	//동작
+	void Move(Vector2 moveDirection);
+	void Jump();
+	//void Dash();
+	void Attack(Weapon* weapon);
+	void Operate();
+
+	//충돌
+	bool IsCollide(FloatRect _rect, FloatRect _rect2);
+	bool IsCollide(Vector2 _point, FloatRect _rect);
 };
 

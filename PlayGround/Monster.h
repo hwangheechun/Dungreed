@@ -30,6 +30,7 @@ public:
 	FloatRect _attackRange;
 	float _attackSpeed;
 	float _attackTime;
+	bool _isLeft = false;
 
 	Player* _player = nullptr;
 
