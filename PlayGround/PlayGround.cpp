@@ -7,10 +7,8 @@ HRESULT PlayGround::Init()
 	GameNode::Init(true);
 
 	SCENEMANAGER->AddScene(L"MainScene", new MainScene());
+	SCENEMANAGER->AddScene(L"DungeonScene", new DungeonScene());
 	SCENEMANAGER->ChangeScene(L"MainScene");
-	
-	CAMERA->ChangeTarget(OBJECTMANAGER->FindObject(ObjectType::Player, L"Player"));
-	CAMERA->SetCameraMode(CameraState::TARGET);
 
 	return S_OK;
 }

@@ -1,18 +1,16 @@
 #pragma once
 #include "Scene.h"
-//#include "Bullet.h"
 
-class MainScene : public Scene
+class DungeonScene : public Scene
 {
 public:
-	virtual ~MainScene() override;
+	virtual ~DungeonScene() override;
 
 	HRESULT Init() override;
 	void Release() override;
 	void Update() override;
 	void Render() override;
-
 private:
-	Image* _backGround = nullptr;
+	Image* _townBackGround = nullptr;
 };
 

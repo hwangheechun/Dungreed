@@ -2,10 +2,12 @@
 #include "../GameFramework/GameNode.h"
 //#include "UI.h"
 //#include "Camera.h"
-#include "Obstacle.h"
+//#include "Obstacle.h"
 //#include "Scene.h"
-//#include "EventManager.h"
-//#include "MainScene.h"
+#include "EventManager.h"
+#include "MainScene.h"
+#include "TownScene.h"
+#include "DungeonScene.h"
 
 class PlayGround : public GameNode
 {	

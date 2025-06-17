@@ -156,6 +156,7 @@
     <ClInclude Include="PlayGround\Belial.h" />
     <ClInclude Include="PlayGround\Bullet.h" />
     <ClInclude Include="PlayGround\Camera.h" />
+    <ClInclude Include="PlayGround\DungeonScene.h" />
     <ClInclude Include="PlayGround\Inventory.h" />
     <ClInclude Include="PlayGround\MainScene.h" />
     <ClInclude Include="PlayGround\Monster.h" />
@@ -194,6 +195,7 @@
     <ClCompile Include="PlayGround\Belial.cpp" />
     <ClCompile Include="PlayGround\Bullet.cpp" />
     <ClCompile Include="PlayGround\Camera.cpp" />
+    <ClCompile Include="PlayGround\DungeonScene.cpp" />
     <ClCompile Include="PlayGround\Inventory.cpp" />
     <ClCompile Include="PlayGround\MainScene.cpp" />
     <ClCompile Include="PlayGround\Monster.cpp" />

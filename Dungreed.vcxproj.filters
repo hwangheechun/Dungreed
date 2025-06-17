@@ -180,6 +180,9 @@
     <ClInclude Include="PlayGround\UI.h">
       <Filter>PlayGround\UI</Filter>
     </ClInclude>
+    <ClInclude Include="PlayGround\DungeonScene.h">
+      <Filter>PlayGround\Scene</Filter>
+    </ClInclude>
     <ClInclude Include="PlayGround\Bullet.h">
       <Filter>PlayGround\Weapon</Filter>
     </ClInclude>
@@ -292,6 +295,9 @@
     </ClCompile>
     <ClCompile Include="PlayGround\UI.cpp">
       <Filter>PlayGround\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\DungeonScene.cpp">
+      <Filter>PlayGround\Scene</Filter>
     </ClCompile>
     <ClCompile Include="PlayGround\Bullet.cpp">
       <Filter>PlayGround\Weapon</Filter>
