@@ -30,3 +30,13 @@ void Tile::SetTile(int terX, int terY, int terrainImageNum)
 	_terrainY = terY;
 	_terrainImageNum = terrainImageNum;
 }
+
+void Tile::SetTiles(int terX, int terY, int terNum, int objX, int objY, int objNum)
+{
+	_terrainX = terX;
+	_terrainY = terY;
+	_terrainImageNum = terNum;
+	_objectX = objX;
+	_objectY = objY;
+	_objectImageNum = objNum;
+}

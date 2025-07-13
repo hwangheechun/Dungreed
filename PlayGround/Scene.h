@@ -32,20 +32,6 @@ protected:
 	int _maxY = 0;
 };
 
-class IntroScene : public Scene
-{
-public:
-	virtual ~IntroScene() override;
-
-	HRESULT Init() override;
-	void Release() override;
-	void Update() override;
-	void Render() override;
-
-private:
-	Image* _introImage;
-};
-
 
 
 

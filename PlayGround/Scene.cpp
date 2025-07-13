@@ -30,39 +30,44 @@ void Scene::Update()
 void Scene::Render()
 {
 	// 타일맵 그려 주기
-}
+	if (_tiles.empty())
+		return;
 
-IntroScene::~IntroScene()
-{
-}
+	//int startX = CAMERA->GetRect().left / TILE_SIZE;		// 100 / 32 -> index 3번째의 타일이 보여지고 있는 중, 0~2번째는 보여주지 X
+	//int startY = CAMERA->GetRect().top / TILE_SIZE;
+	//int endX = CAMERA->GetRect().right / TILE_SIZE;
+	//int endY = CAMERA->GetRect().bottom / TILE_SIZE;
 
-HRESULT IntroScene::Init()
-{
-	//Player* _player = new Player();
+	//// 값을 보정
+	//if (startX <= 0)
+	//	startX = 0;
+	//if (startY <= 0)
+	//	startY = 0;
+	//if (endX >= _maxX)
+	//	endX = _maxX;
+	//if (endY >= _maxY)
+	//	endY = _maxY;
 
-	_introImage = IMAGEMANAGER->AddImage(L"Player Idle", L"Resources/shantae_piratesCurse_banner.png");
+	for (int i = 0; i <= 40; ++i)
+	{
+		for (int j = 0; j <= 40; ++j)
+		{
+			_tiles[i][j]->Render();
 
-	return S_OK;
-}
+		}
 
-void IntroScene::Release()
-{
-}
+	}
 
-void IntroScene::Update()
-{
-	Scene::Update();
-}
-
-void IntroScene::Render()
-{
-	Scene::Render();
-	// 타일맵 그려 주기
-	if (_introImage) {
-		Vector2 vImage{};
-		vImage.x = _introImage->GetWidth() / 2.f;
-		vImage.y = _introImage->GetHeight() / 2.f;
-		_introImage->Render(vImage);
+	if (KEYMANAGER->IsStayKeyDown(0x4C))
+	{
+		for (int i = 0; i <= 40; ++i)
+		{
+			for (int j = 0; j <= 40; ++j)
+			{
+				_D2DRenderer->DrawLine(CAMERA->GetRelativeVector2(Vector2(j * 48, 0)), CAMERA->GetRelativeVector2(Vector2(j * 48, 1600)));  // 좌측 끝에서 우측 끝까지 수평선
+			}
+			_D2DRenderer->DrawLine(CAMERA->GetRelativeVector2(Vector2(0, i * 48)), CAMERA->GetRelativeVector2(Vector2(1920, i * 48)));  // 좌측 끝에서 우측 끝까지 수평선
+		}
 	}
 }
 

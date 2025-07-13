@@ -4,6 +4,9 @@
 #define TILE_SIZE 48		// 32 48 64
 #define MAX_TILE_X 100
 #define MAX_TILE_Y 100
+#define SAMPLE_TILE_SIZE	32
+#define SAMPLE_TILE_X	16
+#define SAMPLE_TILE_Y	18
 
 class Tile : public GameObject
 {
@@ -18,6 +21,8 @@ public:
 	void Render() override;
 
 	void SetTile(int terX, int terY, int terrainImageNum);
+	void SetTiles(int terX, int terY, int terNum, int objX, int objY, int objNum);
+
 
 	bool CanView() 
 	{
@@ -34,6 +39,12 @@ private:
 
 	int _terrainImageNum = 0;	// 초원(0), 도시(1), 광산(2) 어떤 이미지 사용할지
 
+	int _objectX = -1;
+	int _objectY = -1;
+
+	int _objectImageNum = 0;
+
+	bool _blocked = false;		// 타일이 막혀있는지 여부 (true: 막힘, false: 열림)
 public:
 	int GetTerrainX() { return _terrainX; }
 	void SetTerrainX(int x) { _terrainX = x; }
@@ -43,6 +54,18 @@ public:
 
 	int GetTerrainImageNum() { return _terrainImageNum; }
 	void SetTerrainImageNum(int imageNum) { _terrainImageNum = imageNum; }
+
+	int GetObjectX() { return _objectX; }
+	void SetObjectX(int x) { _objectX = x; }
+
+	int GetObjectY() { return _objectY; }
+	void SetObjectY(int y) { _objectY = y; }
+
+	int GetObjectImageNum() { return _objectImageNum; }
+	void SetObjectImageNum(int imageNum) { _objectImageNum = imageNum; }
+
+	bool GetBlocked() { return _blocked; }
+	void SetBlocked(bool blocked) { _blocked = blocked; }
 
 	void SetTileRc(int left, int top) { _rect = RectMakePivot(Vector2(left, top), Vector2(TILE_SIZE, TILE_SIZE), Pivot::LeftTop); }
 };
