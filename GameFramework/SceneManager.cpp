@@ -8,7 +8,7 @@ HRESULT SceneManager::Init()
 {
 	_currentScene = nullptr;
 
-	//_tileImages.emplace_back(IMAGEMANAGER->AddFrameImage(L"terrain", L"Resources/terrain1.png", 16, 18));	// 1번
+	_tileImages.emplace_back(IMAGEMANAGER->AddFrameImage(L"terrain", L"Resources/tileAtlas.png", 10, 9));	// 1번
 
 	return S_OK;
 }
@@ -84,4 +84,12 @@ Image* SceneManager::GetTileImage(int tileNum)
 		return nullptr;
 
 	return _tileImages[tileNum];
+}
+
+bool SceneManager::check()
+{
+	if (_currentScene)
+		return true;
+	else
+		return false;
 }

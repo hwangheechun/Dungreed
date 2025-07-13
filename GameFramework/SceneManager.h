@@ -32,6 +32,8 @@ public:
 
 	HRESULT ChangeScene(const wstring& sceneName);
 
+	bool check();
+
 	Image* GetTileImage(int tileNum);
 };
 

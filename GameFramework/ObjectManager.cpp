@@ -75,6 +75,21 @@ void ObjectManager::RemoveObject(ObjectType objectType, GameObject * deleteObjec
 	}
 }
 
+void ObjectManager::RemoveObject(ObjectType objectType, wstring objectName)
+{
+	vector<GameObject*>& objectList = _objectContainer[objectType];
+	for (int i = 0; i < objectList.size(); ++i)
+	{
+		if (objectList[i]->GetName() == objectName)
+		{
+			objectList[i]->Release();
+			SAFE_DELETE(objectList[i]);
+			objectList.erase(objectList.begin() + i);
+			return;
+		}
+	}
+}
+
 GameObject * ObjectManager::FindObject(ObjectType objectType, wstring objectName)
 {
 	vector<GameObject*>& objectList = _objectContainer[objectType];

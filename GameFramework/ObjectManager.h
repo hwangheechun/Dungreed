@@ -30,6 +30,8 @@ public:
 	void AddObject(ObjectType objectType, class GameObject* newObject);
 	void RemoveObject(ObjectType objectType, class GameObject* deleteObject);
 
+	void RemoveObject(ObjectType objectType, wstring objectName);
+
 	class GameObject* FindObject(ObjectType objectType, wstring objectName);
 	vector<class GameObject*> FindObjects(ObjectType objectType, wstring objectName);
 	vector<class GameObject*>& GetObjectList(ObjectType objectType);
