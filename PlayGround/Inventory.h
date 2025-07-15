@@ -2,6 +2,13 @@
 #include "GameObject.h"
 #include "Weapon.h"
 
+enum class ItemState : int
+{
+	DEFAULT,
+	EQUIP_RELEASE,
+	ITEM_MOVE,
+};
+
 class Inventory : public GameObject
 {
 public:
@@ -21,13 +28,19 @@ public:
 	/*vector<bool> _isSlotCliked{ 2 };
 	vector<bool> _isListCliked{ 15 };*/
 	//vector<bool> _isSlotCliked = { true, false, false, true, true };
+	bool  _isClicked = false;
 	bool  _isSlotCliked[2] = { 0, 0 };
 	bool  _isEquipCliked[2] = { 0, 0 };
 	bool  _isListCliked[15];
-	/*vector<bool> _isSlotCliked2{ 2 };
-	vector<bool> _isListCliked2{ 15 };*/
 
-	Image* _equipSlot1 = nullptr;
-	Image* _equipSlot2 = nullptr;
+	vector<Image*> _equipSlotImage{ 2 };
 	vector<Image*> _equipListImage{ 15 };
+
+	bool _isEquiped[2] = { 0,0 };
+	bool _isExist[15];
+	ItemState _itemState;
+
+	void CleanSlotValue();
+	void CleanListValue();
+	void CleanListImage();
 };
