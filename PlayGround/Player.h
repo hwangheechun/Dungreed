@@ -55,6 +55,7 @@ public:
 	//void Dash();
 	void Attack(Weapon* weapon);
 	void Operate();
+	void InventoryOperate();
 
 	//Ãæµ¹
 	bool IsCollide(FloatRect _rect, FloatRect _rect2);
