@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "MainScene.h"
 #include <string>
 
 Player::Player()
@@ -15,7 +16,7 @@ Player::~Player()
 void Player::Init()
 {
 	_name = L"Player";
-	_position = Vector2(0, WINSIZEY - 150);
+	_position = Vector2(960, 300);
 	_size = Vector2(80, 120);
 	_rect = RectMakePivot(_position, _size, Pivot::Center);
 	_active = true;
@@ -92,10 +93,10 @@ void Player::Update()
 	else
 		_gravity = 0.f;
 
-	if (_position.y + _size.y / 2 >= WINSIZEY)
-	{
-		_isOnGround = true;
-	}
+	//if (_position.y + _size.y / 2 >= WINSIZEY)
+	//{
+	//	_isOnGround = true;
+	//}
 
 	//애니메이션 업데이트
 	_playerIdle->FrameUpdate(TIMEMANAGER->GetElapsedTime());
@@ -126,11 +127,57 @@ void Player::Update()
 		if (!dynamic_cast<Bullet*>(_bullet[i])->GetActive())
 			dynamic_cast<Bullet*>(_bullet[i])->SetPosition(_position);
 	}
-}
 
+	//if(_position.x < - 300)
+	//	SCENEMANAGER->ChangeScene(L"DungeonScene1");	//캐릭터가 왼쪽으로 너무 벗어나면 던전 씬으로 이동
+	//else if (_position.x > 300)
+	//	SCENEMANAGER->ChangeScene(L"DungeonStartScene1");	//캐릭터가 오른쪽으로 너무 벗어나면 던전 씬으로 이동
+
+	if (_mainScene)
+	{
+		for (int y = 0; y < 25; ++y)
+		{
+			for (int x = 0; x < 50; ++x)
+			{
+				Tile* tile = _mainScene->GetTile(x, y);
+				
+				if (y == 24)
+				{
+					tile->_blocked = true;	//테스트용으로 타일을 막아둠
+					if (tile && tile->_blocked)
+					{
+						if (IsCollide(_rect, tile->GetRect()))	//캐릭터와 타일의 충돌 체크
+						{
+							_isOnGround = true;
+						}
+					}
+					
+				}
+			}
+		}
+	}
+	
+}
 
 void Player::Render()
 {
+	//if (_mainScene)
+	//{
+	//	//Tile* tile = _mainScene->GetTile(tileX, tileY);
+	//	for (int y = 0; y < 25; ++y)
+	//	{
+	//		for (int x = 0; x < 50; ++x)
+	//		{
+	//			Tile* tile = _mainScene->GetTile(x, y);
+	//			_D2DRenderer->RenderText(300 + x * 10, 200 + y * 10, to_wstring((int)tile->_blocked), 15);
+	//			if (tile && tile->_blocked)
+	//			{
+
+	//			}
+	//		}
+	//	}
+	//}
+
 	if (_inventory && _inventory->GetActive())
 	{
 		if ((_inventory->_isSlotCliked[0] && _inventory->_equipSlotImage[0]) || (_inventory->_isSlotCliked[1] && _inventory->_equipSlotImage[1]))
@@ -426,15 +473,20 @@ void Player::Operate()
 		}
 	}
 
-	if (KEYMANAGER->IsOnceKeyDown(0x4A))	//V_inventory
+	if (KEYMANAGER->IsOnceKeyDown(0x4A))	//J
 	{
 		SCENEMANAGER->ChangeScene(L"DungeonScene");
 		SetPosition(Vector2(0, WINSIZEY - 150));	//던전 씬으로 이동할 때 캐릭터 위치 초기화
 	}
 
-	if (KEYMANAGER->IsOnceKeyDown(0x4F))	//V_inventory
+	if (KEYMANAGER->IsOnceKeyDown(0x4F))	//K
 	{
 		SCENEMANAGER->check();
+	}
+
+	if (KEYMANAGER->IsOnceKeyDown(0x4D))	//M
+	{
+		SCENEMANAGER->ScenePlaceByDFS();
 	}
 }
 

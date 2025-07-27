@@ -5,6 +5,9 @@
 #include "UI.h"
 #include "Bullet.h"
 
+class MainScene;
+class Tile;
+
 enum class PlayerState : int
 {
 	IDLE,
@@ -60,5 +63,8 @@ public:
 	//Ãæµ¹
 	bool IsCollide(FloatRect _rect, FloatRect _rect2);
 	bool IsCollide(Vector2 _point, FloatRect _rect);
+
+	MainScene* _mainScene = nullptr;
+	void SetMainScene(MainScene* scene) { _mainScene = scene; }
 };
 
