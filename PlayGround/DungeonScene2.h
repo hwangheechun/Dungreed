@@ -1,16 +1,17 @@
 #pragma once
 #include "Scene.h"
 
-class DungeonScene : public Scene
+class DungeonScene2 : public Scene
 {
 public:
-	virtual ~DungeonScene() override;
+	virtual ~DungeonScene2() override;
 
 	HRESULT Init() override;
 	void Release() override;
 	void Update() override;
 	void Render() override;
+
 private:
-	Image* _bossBackGround = nullptr;
+	
 };
 

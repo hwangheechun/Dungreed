@@ -22,6 +22,8 @@ public:
 	void Update() override;
 	void Render() override;
 
+	void SetRandomScene(wstring nextScene) { _nextScene = nextScene; }
+
 protected:
 	wstring _nextScene;
 
@@ -30,6 +32,8 @@ protected:
 
 	int _maxX = 0;
 	int _maxY = 0;
+
+	void LoadMapFromFile(const std::wstring& mapFileName);
 };
 
 

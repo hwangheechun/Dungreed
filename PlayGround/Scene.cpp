@@ -12,6 +12,8 @@ Scene::~Scene()
 
 HRESULT Scene::Init()
 {
+	IMAGEMANAGER->AddFrameImage(L"towntile", L"Resources/Map/TownTile.png", 16, 18);
+
 	return S_OK;
 }
 
@@ -70,4 +72,6 @@ void Scene::Render()
 		}
 	}
 }
+
+
 
