@@ -4,9 +4,9 @@
 #define TILE_SIZE 48		// 32 48 64
 #define MAX_TILE_X 100
 #define MAX_TILE_Y 100
-#define SAMPLE_TILE_SIZE	32
-#define SAMPLE_TILE_X	16
-#define SAMPLE_TILE_Y	18
+#define SAMPLE_TILE_SIZE	48
+#define SAMPLE_TILE_X	10
+#define SAMPLE_TILE_Y	10
 
 class Tile : public GameObject
 {
@@ -33,6 +33,7 @@ public:
 		return false;
 	}
 
+	bool _blocked = false;		// 타일이 막혀있는지 여부 (true: 막힘, false: 열림)
 private:
 	int _terrainX = -1;			// 타일 이미지 x 인덱스
 	int _terrainY = -1;			// 타일 이미지 y 인덱스
@@ -44,7 +45,6 @@ private:
 
 	int _objectImageNum = 0;
 
-	bool _blocked = false;		// 타일이 막혀있는지 여부 (true: 막힘, false: 열림)
 public:
 	int GetTerrainX() { return _terrainX; }
 	void SetTerrainX(int x) { _terrainX = x; }
