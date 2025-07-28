@@ -3,6 +3,7 @@
 
 enum class CameraState : int
 {
+	NONE,
 	TARGET,			// 타겟 고정
 	TARGET_LERP,	// 타겟 고정, 부드럽게 보정
 	END,
@@ -49,6 +50,8 @@ public:
 
 	FloatRect GetRect() { return _rc; }
 
+	void Move(Vector2 moveDirection);
+	void SetPosition(Vector2 position) { _position = position; UpdateRect(); CheckRect(); }
 private:
 	void UpdateRect();
 	void CheckRect();

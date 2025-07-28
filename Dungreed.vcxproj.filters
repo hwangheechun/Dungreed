@@ -64,6 +64,12 @@
     <Filter Include="PlayGround\Weapon">
       <UniqueIdentifier>{3e734b36-0782-42a8-bbcd-de3bed7a9f28}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameFramework\Button">
+      <UniqueIdentifier>{7fdac895-a15f-469d-ab8f-c61c5a6777c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\Scene\DungeonStartScene">
+      <UniqueIdentifier>{4cd25aef-d129-4f6a-9fc3-0b18101b0118}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameFramework\D2DRenderer.h">
@@ -186,6 +192,30 @@
     <ClInclude Include="PlayGround\Bullet.h">
       <Filter>PlayGround\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="PlayGround\MapToolScene.h">
+      <Filter>PlayGround\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameFramework\Button.h">
+      <Filter>GameFramework\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround\TestScene.h">
+      <Filter>PlayGround\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround\DungeonScene2.h">
+      <Filter>PlayGround\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround\DungeonScene3.h">
+      <Filter>PlayGround\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround\DungeonScene1.h">
+      <Filter>PlayGround\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround\DungeonScene4.h">
+      <Filter>PlayGround\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround\DungeonStartScene1.h">
+      <Filter>PlayGround\Scene\DungeonStartScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameFramework\D2DRenderer+Draw.cpp">
@@ -301,6 +331,30 @@
     </ClCompile>
     <ClCompile Include="PlayGround\Bullet.cpp">
       <Filter>PlayGround\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\MapToolScene.cpp">
+      <Filter>PlayGround\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameFramework\Button.cpp">
+      <Filter>GameFramework\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\TestScene.cpp">
+      <Filter>PlayGround\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\DungeonScene2.cpp">
+      <Filter>PlayGround\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\DungeonScene3.cpp">
+      <Filter>PlayGround\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\DungeonScene4.cpp">
+      <Filter>PlayGround\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\DungeonScene1.cpp">
+      <Filter>PlayGround\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround\DungeonStartScene1.cpp">
+      <Filter>PlayGround\Scene\DungeonStartScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

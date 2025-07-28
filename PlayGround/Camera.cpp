@@ -3,7 +3,7 @@
 #include "GameObject.h"
 
 Camera::Camera()
-	: _position(0.f, 0.f), _mapSize(Vector2(WINSIZEX , 100))
+	: _position(0.f, 0.f), _mapSize(Vector2(WINSIZEX , WINSIZEY))
 {
 }
 
@@ -71,7 +71,7 @@ FloatRect Camera::GetRelativeRect(FloatRect _rect)
 
 void Camera::UpdateRect()
 {
-	_rc = RectMakePivot(_position, Vector2{ WINSIZEX, 1000 }, Pivot::Center);
+	_rc = RectMakePivot(_position, Vector2{ WINSIZEX, WINSIZEY }, Pivot::Center);
 }
 
 void Camera::CheckRect()
@@ -97,4 +97,11 @@ void Camera::CheckRect()
 Vector2 Camera::Lerp(Vector2 start, Vector2 end, float t)
 {
 	return start + (end - start) * t;
+}
+
+void Camera::Move(Vector2 moveVector)
+{
+	_position += moveVector * TIMEMANAGER->GetElapsedTime();
+	UpdateRect();
+	CheckRect();
 }

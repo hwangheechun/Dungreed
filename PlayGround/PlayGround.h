@@ -5,6 +5,10 @@
 #include "TownScene.h"
 #include "DungeonScene.h"
 #include "MapToolScene.h"
+#include "DungeonStartScene1.h"
+#include "DungeonScene1.h"
+#include "DungeonScene2.h"
+#include "DungeonScene3.h"
 
 class PlayGround : public GameNode
 {	

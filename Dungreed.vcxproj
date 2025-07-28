@@ -131,6 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="GameFramework\Animation.h" />
+    <ClInclude Include="GameFramework\Button.h" />
     <ClInclude Include="GameFramework\D2DRenderer.h" />
     <ClInclude Include="GameFramework\EventManager.h" />
     <ClInclude Include="GameFramework\FloatRect.h" />
@@ -157,14 +158,21 @@
     <ClInclude Include="PlayGround\Bullet.h" />
     <ClInclude Include="PlayGround\Camera.h" />
     <ClInclude Include="PlayGround\DungeonScene.h" />
+    <ClInclude Include="PlayGround\DungeonScene1.h" />
+    <ClInclude Include="PlayGround\DungeonScene2.h" />
+    <ClInclude Include="PlayGround\DungeonScene3.h" />
+    <ClInclude Include="PlayGround\DungeonScene4.h" />
+    <ClInclude Include="PlayGround\DungeonStartScene1.h" />
     <ClInclude Include="PlayGround\Inventory.h" />
     <ClInclude Include="PlayGround\MainScene.h" />
+    <ClInclude Include="PlayGround\MapToolScene.h" />
     <ClInclude Include="PlayGround\Monster.h" />
     <ClInclude Include="PlayGround\Player.h" />
     <ClInclude Include="PlayGround\PlayerStatus.h" />
     <ClInclude Include="PlayGround\PlayGround.h" />
     <ClInclude Include="PlayGround\Scene.h" />
     <ClInclude Include="PlayGround\Skeleton.h" />
+    <ClInclude Include="PlayGround\TestScene.h" />
     <ClInclude Include="PlayGround\Tile.h" />
     <ClInclude Include="PlayGround\TownScene.h" />
     <ClInclude Include="PlayGround\UI.h" />
@@ -173,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameFramework\Animation.cpp" />
+    <ClCompile Include="GameFramework\Button.cpp" />
     <ClCompile Include="GameFramework\D2DRenderer+Draw.cpp" />
     <ClCompile Include="GameFramework\D2DRenderer.cpp" />
     <ClCompile Include="GameFramework\EventManager.cpp" />
@@ -196,14 +205,21 @@
     <ClCompile Include="PlayGround\Bullet.cpp" />
     <ClCompile Include="PlayGround\Camera.cpp" />
     <ClCompile Include="PlayGround\DungeonScene.cpp" />
+    <ClCompile Include="PlayGround\DungeonScene1.cpp" />
+    <ClCompile Include="PlayGround\DungeonScene2.cpp" />
+    <ClCompile Include="PlayGround\DungeonScene3.cpp" />
+    <ClCompile Include="PlayGround\DungeonScene4.cpp" />
+    <ClCompile Include="PlayGround\DungeonStartScene1.cpp" />
     <ClCompile Include="PlayGround\Inventory.cpp" />
     <ClCompile Include="PlayGround\MainScene.cpp" />
+    <ClCompile Include="PlayGround\MapToolScene.cpp" />
     <ClCompile Include="PlayGround\Monster.cpp" />
     <ClCompile Include="PlayGround\Player.cpp" />
     <ClCompile Include="PlayGround\PlayerStatus.cpp" />
     <ClCompile Include="PlayGround\PlayGround.cpp" />
     <ClCompile Include="PlayGround\Scene.cpp" />
     <ClCompile Include="PlayGround\Skeleton.cpp" />
+    <ClCompile Include="PlayGround\TestScene.cpp" />
     <ClCompile Include="PlayGround\Tile.cpp" />
     <ClCompile Include="PlayGround\TownScene.cpp" />
     <ClCompile Include="PlayGround\UI.cpp" />

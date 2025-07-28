@@ -10,9 +10,12 @@ HRESULT PlayGround::Init()
 	SCENEMANAGER->AddScene(L"DungeonScene", new DungeonScene());
 	SCENEMANAGER->AddScene(L"Test", new TownScene());
 	SCENEMANAGER->AddScene(L"MapToolScene", new MapToolScene());
+	SCENEMANAGER->AddScene(L"DungeonStartScene1", new DungeonStartScene1());
+	SCENEMANAGER->AddScene(L"DungeonScene1", new DungeonScene1());
+	SCENEMANAGER->AddScene(L"DungeonScene2", new DungeonScene2());
+	SCENEMANAGER->AddScene(L"DungeonScene3", new DungeonScene3());
 	SCENEMANAGER->ChangeScene(L"MainScene");
-	//SCENEMANAGER->ChangeScene(L"Test");
-	//SCENEMANAGER->ChangeScene(L"MapToolScene");
+
 
 	return S_OK;
 }
